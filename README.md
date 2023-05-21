@@ -6,3 +6,8 @@ Prospera adalah kata yang berasal dari bahasa Latin yang berarti "berkembang" at
 2. Keseimbangan dan Keharmonisan
 3. Kolaborasi dan Komunitas
 4. Peluang dan Keberuntungan
+
+## Technologies
+- Flutter
+- Laravel
+- Mysql
