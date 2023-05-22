@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'password_field.dart';
-// import 'signup.dart';
+import 'signup.dart';
 
 class LoginState extends Equatable {
   final String email;
@@ -65,7 +65,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: const Text(
-                  'Log In',
+                  'Log In UMKM',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -178,21 +178,22 @@ class LoginPage extends StatelessWidget {
                     ),
                   )),
               const SizedBox(height: 16.0),
-              TextButton(
-                onPressed: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return Signup();
-                  //     },
-                  //   ),
-                  // );
-                },
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigate to forgot sign up page
+                    Navigator.pushNamed(context, '/signUp');
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Color(int.parse('0xff613EEA')),
+                      fontSize: 16.0,
                       fontWeight: FontWeight.bold,
-                      color: Color(int.parse('0xff613EEA'))),
+                    ),
+                  ),
                 ),
               ),
             ],
