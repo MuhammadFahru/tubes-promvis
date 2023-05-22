@@ -32,31 +32,31 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: Colors.blue),
-            activeIcon: Icon(Icons.home, color: Colors.blue),
+            icon: Icon(Icons.home_outlined, color: Colors.purple),
+            activeIcon: Icon(Icons.home, color: Colors.purple),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.shop_outlined,
-              color: Colors.blue,
+              color: Colors.purple,
             ),
-            activeIcon: Icon(Icons.shop, color: Colors.blue),
+            activeIcon: Icon(Icons.shop, color: Colors.purple),
             label: 'Business',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined, color: Colors.blue),
-            activeIcon: Icon(Icons.message, color: Colors.blue),
+            icon: Icon(Icons.message_outlined, color: Colors.purple),
+            activeIcon: Icon(Icons.message, color: Colors.purple),
             label: 'Settings',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, color: Colors.blue),
-            activeIcon: Icon(Icons.person, color: Colors.blue),
+            icon: Icon(Icons.person_outline, color: Colors.purple),
+            activeIcon: Icon(Icons.person, color: Colors.purple),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.purple,
         onTap: _onItemTapped,
       ),
     );
