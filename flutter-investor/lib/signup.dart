@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'package:flutter/gestures.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/services.dart';
 
@@ -44,7 +43,7 @@ class _SignupState extends State<Signup> {
                       Navigator.pop(context);
                     },
                   ),
-                   const SizedBox(width: 100.0),
+                  const SizedBox(width: 100.0),
                   // Title
                   Container(
                     alignment: Alignment.center,
