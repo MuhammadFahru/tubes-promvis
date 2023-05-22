@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'password_field.dart';
+import 'signup.dart';
 
 class LoginState extends Equatable {
   final String email;
@@ -178,7 +179,13 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 16.0),
               TextButton(
                 onPressed: () {
-                  // Navigate to sign-up page
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Signup();
+                      },
+                    ),
+                  );
                 },
                 child: Text(
                   'Sign Up',
