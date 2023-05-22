@@ -103,6 +103,7 @@ class LoginPage extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to forgot password page
+                    Navigator.pushNamed(context, '/forgotPassword');
                   },
                   child: Text(
                     'Forgot your password?',
