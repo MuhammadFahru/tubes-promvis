@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'login.dart';
 
 void main() {
@@ -11,10 +12,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Prospera',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: LoginPage(),
-    );
+    return MultiBlocProvider(
+        providers: [BlocProvider<LoginCubit>(create: (_) => LoginCubit())],
+        child: MaterialApp(
+          title: 'Prospera',
+          theme: ThemeData(primarySwatch: Colors.deepPurple),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LoginPage(),
+          },
+        ));
   }
 }
