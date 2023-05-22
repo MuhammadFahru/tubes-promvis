@@ -94,7 +94,44 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               // Password
-              const PasswordTextField(),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(int.parse('0xffF6F6F6')),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1.0,
+                  ),
+                ),
+                child: BlocBuilder<PasswordVisibilityCubit, bool>(
+                    builder: (context, isPasswordVisible) {
+                  return TextField(
+                    controller: passwordController,
+                    obscureText: !isPasswordVisible,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                            color: Color(int.parse('0xffBDBDBD')),
+                            fontWeight: FontWeight.bold),
+                        suffixIcon: GestureDetector(
+                          onTapDown: (_) => context
+                              .read<PasswordVisibilityCubit>()
+                              .showPassword(),
+                          onTapUp: (_) => context
+                              .read<PasswordVisibilityCubit>()
+                              .hidePassword(),
+                          onTapCancel: () => context
+                              .read<PasswordVisibilityCubit>()
+                              .hidePassword(),
+                          child: IconButton(
+                            icon: const Icon(Icons.visibility),
+                            onPressed: () {},
+                          ),
+                        )),
+                  );
+                }),
+              ),
               const SizedBox(height: 8.0),
               // password forgot
               Container(
