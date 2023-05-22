@@ -1,45 +1,92 @@
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
+  ForgotPasswordPage({Key? key}) : super(key: key);
   final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
-                Text('Forgot Password'),
+                Container(
+                  margin: EdgeInsets.only(left: 95),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Forgot Password',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 16.0),
-            Text(
-              'Please enter your email address to receive a password reset code.',
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
+            const SizedBox(height: 16.0),
+            const Center(
+              child: Text(
+                'Enter your email and we’ll send you a link',
               ),
             ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                final email = emailController.text;
-                // TODO: Implement code to send reset code to the email
-              },
-              child: Text('Send Code'),
+            const Center(
+              child: Text('to reset your password.'),
+            ),
+            const SizedBox(height: 16.0),
+            // email field
+            Container(
+              decoration: BoxDecoration(
+                color: Color(int.parse('0xffF6F6F6')),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1.0,
+                ),
+              ),
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                        color: Color(int.parse('0xffBDBDBD')),
+                        fontWeight: FontWeight.bold)),
+              ),
+            ),
+            const Spacer(),
+            Container(
+              margin: const EdgeInsets.only(bottom: 25),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(int.parse('0xff613EEA')),
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                onPressed: () {
+                  final email = emailController.text;
+                  // TODO: Implement code to send reset code to the email
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: const Text(
+                    'Send code',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
