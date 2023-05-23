@@ -47,14 +47,16 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
           title: Text('Home'),
+          leading: IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              // Navigate to profile page
+            },
+          ),
           actions: [
-            IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () {
-                // Navigate to profile page
-              },
-            ),
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {

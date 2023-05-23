@@ -73,7 +73,23 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portfolio'),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text('Portofolio'),
+        leading: IconButton(
+          icon: Icon(Icons.person),
+          onPressed: () {
+            // Navigate to profile page
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications page
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +109,23 @@ class MarketplaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text('Marketplace'),
+        leading: IconButton(
+          icon: Icon(Icons.person),
+          onPressed: () {
+            // Navigate to profile page
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications page
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +145,23 @@ class SupportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text('Support'),
+        leading: IconButton(
+          icon: Icon(Icons.person),
+          onPressed: () {
+            // Navigate to profile page
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications page
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +181,23 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         title: Text('Profile'),
+        leading: IconButton(
+          icon: Icon(Icons.person),
+          onPressed: () {
+            // Navigate to profile page
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications page
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
