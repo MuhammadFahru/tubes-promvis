@@ -4,6 +4,7 @@ import 'login.dart';
 import 'forgot_password.dart';
 import 'password_sent.dart';
 import 'signup.dart';
+import 'index.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
             '/forgotPassword': (context) => ForgotPasswordPage(),
             '/signUp': (context) => Signup(),
             '/passwordSent': (context) => PasswordSentPage(),
+            '/index': (context) => IndexPage(),
           },
         ));
   }

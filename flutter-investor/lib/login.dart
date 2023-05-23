@@ -30,7 +30,7 @@ class LoginState extends Equatable {
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginState(email: '', id: '', userData: {}));
 
-  void performLogin(String email, String password) {
+  bool performLogin(String email, String password) {
     final email = 'fakemail';
     final id = '1';
     final userData = {'email': email, 'age': 0};
@@ -41,6 +41,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     emit(newState);
+    return true;
   }
 }
 
@@ -166,7 +167,9 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                     final email = emailController.text;
                     final password = passwordController.text;
-                    loginCubit.performLogin(email, password);
+                    if (loginCubit.performLogin(email, password)) {
+                      Navigator.pushNamed(context, '/index');
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
