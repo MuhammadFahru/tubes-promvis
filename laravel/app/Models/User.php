@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +24,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
+        'roles',
     ];
 
     /**
@@ -31,6 +38,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     /**
@@ -41,4 +50,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function bank()
+    {
+        return $this->belongsTo(MasterdataBank::class, 'bank_id', 'id');
+    }
+
+    public function kategoriUMKM()
+    {
+        return $this->belongsTo(MasterdataKategoriUMKM::class, 'kategori_umkm_id', 'id');
+    }
+
+    public function sektorUMKM()
+    {
+        return $this->belongsTo(MasterdataSektorUMKM::class, 'sektor_umkm_id', 'id');
+    }
+
+    public function walletInvestor()
+    {
+        return $this->hasOne(WalletInvestor::class, 'users_id', 'id');
+    }
 }
