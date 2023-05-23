@@ -95,37 +95,39 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Nopal',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              'Modal Ternak Lele',
-              textAlign: TextAlign.left,
-            ),
-            Text(
-              '08123456789',
-              textAlign: TextAlign.left,
-            ),
-            Text(
-              'nopal@nopal.com',
-              textAlign: TextAlign.left,
-            ),
-          ],
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Nopal',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Modal Ternak Lele',
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                '08123456789',
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                'nopal@nopal.com',
+                textAlign: TextAlign.left,
+              ),
+            ],
+          ),
         ),
-        SizedBox(width: 10),
-        Container(
-          margin: EdgeInsets.only(top: 10),
+        Padding(
+          padding: EdgeInsets.only(top: 10, left: 10),
           child: CircleAvatar(
             radius: 50,
             // Your profile image or icon can be added here
-            backgroundImage: AssetImage('assets/image'),
+            backgroundImage: AssetImage('assets/image/momo.png'),
           ),
         ),
       ],
