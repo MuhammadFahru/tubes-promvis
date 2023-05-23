@@ -1,4 +1,8 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+///
 
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class ForgotPasswordPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
@@ -20,9 +25,10 @@ class ForgotPasswordPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 95),
-                  alignment: Alignment.centerRight,
+                const SizedBox(
+                  width: 95,
+                ),
+                const Center(
                   child: Text(
                     'Forgot Password',
                     style: TextStyle(
@@ -76,7 +82,14 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   final email = emailController.text;
-                  // TODO: Implement code to send reset code to the email
+                  if (EmailValidator.validate(email)) {
+                    Navigator.pushNamed(context, '/passwordSent',
+                        arguments: email);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Invalid email')),
+                    );
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 20),

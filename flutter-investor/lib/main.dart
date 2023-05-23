@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'login.dart';
 import 'forgot_password.dart';
+import 'password_sent.dart';
 import 'signup.dart';
 
 void main() {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
             '/': (context) => LoginPage(),
             '/forgotPassword': (context) => ForgotPasswordPage(),
             '/signUp': (context) => Signup(),
+            '/passwordSent': (context) => PasswordSentPage(),
           },
         ));
   }
