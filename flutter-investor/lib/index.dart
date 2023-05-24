@@ -44,25 +44,25 @@ class IndexPage extends StatelessWidget {
                 unselectedItemColor: Colors.grey,
                 unselectedIconTheme: IconThemeData(color: Colors.grey),
                 currentIndex: activeScreenIndex,
-                items: [
+                items: const [
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.folder),
+                    icon: Icon(Icons.pie_chart_outline_rounded),
                     label: 'Portfolio',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_cart),
+                    icon: Icon(Icons.shopping_cart), // TODO: Custom market icon
                     label: 'Marketplace',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.support),
+                    icon: Icon(Icons.chat_rounded),
                     label: 'Support',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
+                    icon: Icon(Icons.person_outline_rounded),
                     label: 'Profile',
                   ),
                 ],

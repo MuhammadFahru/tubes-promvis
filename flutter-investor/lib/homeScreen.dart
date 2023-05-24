@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Wallet Cubit
@@ -43,26 +44,46 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider<PortfolioCubit>(create: (context) => PortfolioCubit()),
         BlocProvider<OngoingFundingCubit>(
-            create: (context) => OngoingFundingCubit())
+            create: (context) => OngoingFundingCubit()),
       ],
       child: Scaffold(
+        backgroundColor: Color(int.parse('0xffDBDBDB')),
         appBar: AppBar(
-          backgroundColor: Color(int.parse('0xff613EEA')),
+          toolbarHeight: 60,
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text('Home'),
-          leading: IconButton(
-            icon: Icon(Icons.person),
-            onPressed: () {
-              // Navigate to profile page
-            },
+          title: const Text(
+            'Home',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+          leading: Container(
+            margin: EdgeInsets.all(4),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle, color: Color(int.parse('0xff613EEA'))),
+            child: IconButton(
+              icon: const Icon(Icons.person),
+              iconSize: 30,
+              onPressed: () {
+                // Navigate to profile page
+              },
+            ),
           ),
           actions: [
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                // Navigate to notifications page
-              },
+            Container(
+              margin: EdgeInsets.all(4),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(int.parse('0xff613EEA'))),
+              child: IconButton(
+                icon: const Icon(Icons.notifications_outlined),
+                iconSize: 30,
+                onPressed: () {
+                  // Navigate to profile page
+                },
+              ),
             ),
           ],
         ),
@@ -74,23 +95,56 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 16.0),
               WalletModule(),
               SizedBox(height: 16.0),
+              // portofolio section
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Portfolio',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Portfolio',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(int.parse('0xff613EEA')),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            context.read<ScreenCubit>().updateScreen(1);
+                          },
+                          child: Text(
+                            'more',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  )),
               SizedBox(height: 8.0),
               PortfolioList(),
               SizedBox(height: 16.0),
+
+              //ongoing funding section
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Ongoing Funding',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Ongoing Funding',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(int.parse('0xff613EEA')),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            context.read<ScreenCubit>().updateScreen(1);
+                          },
+                          child: Text(
+                            'more',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  )),
               SizedBox(height: 8.0),
               OngoingFundingList(),
             ],
@@ -107,8 +161,9 @@ class WalletModule extends StatelessWidget {
     return BlocBuilder<WalletCubit, double>(
       builder: (context, walletValue) {
         return Container(
-          margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-          padding: EdgeInsets.only(top: 16, bottom: 32, left: 16, right: 16),
+          margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          padding:
+              const EdgeInsets.only(top: 16, bottom: 32, left: 16, right: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Color(int.parse('0xff613EEA')),
@@ -121,44 +176,83 @@ class WalletModule extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Total Wallet',
                         style: TextStyle(fontSize: 14.0, color: Colors.white),
                       ),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                       Text(
-                        'Rp${walletValue},00',
-                        style: TextStyle(fontSize: 24.0, color: Colors.white),
+                        'Rp$walletValue,00',
+                        style: const TextStyle(
+                            fontSize: 24.0, color: Colors.white),
                       ),
                     ]),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
                     children: [
-                      IconButton(
-                          style: ButtonStyle(),
-                          onPressed: () {},
-                          icon: Icon(Icons.man_rounded)),
-                      Text(
+                      Container(
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/topUp');
+                          },
+                          icon: Icon(Icons.add),
+                          color: Color(int.parse('0xff613EEA')),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
                         'Top Up',
                         style: TextStyle(fontSize: 12, color: Colors.white),
                       )
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle withdraw button pressed
-                    },
-                    child: Text('Withdraw'),
+                  Column(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.arrow_downward_rounded),
+                          color: Color(int.parse('0xff613EEA')),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'Withdraw',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      )
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle history button pressed
-                    },
-                    child: Text('History'),
+                  Column(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(Icons.sticky_note_2),
+                          color: Color(int.parse('0xff613EEA')),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        'History',
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      )
+                    ],
                   ),
                 ],
               ),

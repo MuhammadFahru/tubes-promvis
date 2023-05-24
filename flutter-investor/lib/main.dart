@@ -5,6 +5,7 @@ import 'forgot_password.dart';
 import 'password_sent.dart';
 import 'signup.dart';
 import 'index.dart';
+import 'topUp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [BlocProvider<LoginCubit>(create: (_) => LoginCubit())],
+        providers: [
+          BlocProvider<LoginCubit>(create: (_) => LoginCubit()),
+          BlocProvider<TopUpCubit>(create: (context) => TopUpCubit())
+        ],
         child: MaterialApp(
           title: 'Prospera',
           theme: ThemeData(primarySwatch: Colors.deepPurple),
@@ -28,6 +32,7 @@ class MyApp extends StatelessWidget {
             '/signUp': (context) => Signup(),
             '/passwordSent': (context) => PasswordSentPage(),
             '/index': (context) => IndexPage(),
+            '/topUp': (context) => TopUpPage(),
           },
         ));
   }
