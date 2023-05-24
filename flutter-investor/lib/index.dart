@@ -33,33 +33,43 @@ class IndexPage extends StatelessWidget {
         ),
         bottomNavigationBar: BlocBuilder<ScreenCubit, int>(
           builder: (context, activeScreenIndex) {
-            return BottomNavigationBar(
-              currentIndex: activeScreenIndex,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.folder),
-                  label: 'Portfolio',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  label: 'Marketplace',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.support),
-                  label: 'Support',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-              ],
-              onTap: (index) {
-                context.read<ScreenCubit>().updateScreen(index);
-              },
+            return Container(
+              decoration: BoxDecoration(
+                  border:
+                      Border(bottom: BorderSide(color: Colors.grey, width: 3))),
+              child: BottomNavigationBar(
+                selectedItemColor: Color(int.parse('0xff613EEA')),
+                selectedIconTheme:
+                    IconThemeData(color: Color(int.parse('0xff613EEA'))),
+                unselectedItemColor: Colors.grey,
+                unselectedIconTheme: IconThemeData(color: Colors.grey),
+                currentIndex: activeScreenIndex,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.folder),
+                    label: 'Portfolio',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.shopping_cart),
+                    label: 'Marketplace',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.support),
+                    label: 'Support',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                ],
+                onTap: (index) {
+                  context.read<ScreenCubit>().updateScreen(index);
+                },
+              ),
             );
           },
         ),
