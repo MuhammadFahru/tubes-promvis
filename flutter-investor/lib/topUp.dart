@@ -67,28 +67,67 @@ class TopUpPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              DropdownButton<String>(
-                value: context.watch<TopUpCubit>().state.selectedBank,
-                onChanged: (value) =>
-                    context.read<TopUpCubit>().selectBank(value!),
-                items: [
-                  if (context.watch<TopUpCubit>().state.selectedBank.isEmpty)
-                    DropdownMenuItem(
-                      value: '',
-                      child: Text('Pick a bank'),
-                    ),
-                  ...context
-                      .watch<TopUpCubit>()
-                      .state
-                      .banks
-                      .map((bank) => DropdownMenuItem(
-                            value: bank,
-                            child: Text(bank),
-                          ))
-                      .toList(),
-                ],
+              SizedBox(height: 32),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Pilih bank:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
-              SizedBox(height: 16.0),
+              Container(
+                margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: DropdownButtonHideUnderline(
+                    child: Container(
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: context.watch<TopUpCubit>().state.selectedBank,
+                    onChanged: (value) =>
+                        context.read<TopUpCubit>().selectBank(value!),
+                    items: [
+                      if (context
+                          .watch<TopUpCubit>()
+                          .state
+                          .selectedBank
+                          .isEmpty)
+                        const DropdownMenuItem(
+                          value: '',
+                          child: Text('Pick a bank'),
+                        ),
+                      ...context
+                          .watch<TopUpCubit>()
+                          .state
+                          .banks
+                          .map((bank) => DropdownMenuItem(
+                                value: bank,
+                                child: Text(bank),
+                              ))
+                          .toList(),
+                    ],
+                  ),
+                )),
+              ),
+              const SizedBox(height: 50.0),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Pilih nominal:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32.0),
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 3,
@@ -105,12 +144,12 @@ class TopUpPage extends StatelessWidget {
                             onTap: () => context
                                 .read<TopUpCubit>()
                                 .toggleNominal(nominal),
-                            child: Center(child: Text('\$$nominal')),
+                            child: Center(child: Text('Rp$nominal,00')),
                           ),
                         ))
                     .toList(),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) =>
