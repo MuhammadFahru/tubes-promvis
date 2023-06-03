@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<LoginCubit>(create: (_) => LoginCubit()),
-          BlocProvider<TopUpCubit>(create: (context) => TopUpCubit())
+          BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
         ],
         child: MaterialApp(
           title: 'Prospera',
