@@ -5,22 +5,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TopUpCubit extends Cubit<TopUpState> {
   TopUpCubit() : super(TopUpState(banks: ['Bank A', 'Bank B', 'Bank C']));
   final formKey = GlobalKey<FormState>();
+  final customNominalController = TextEditingController();
 
   void selectBank(String bank) {
     emit(state.copyWith(selectedBank: bank));
   }
 
-  void toggleNominal(int nominal) {
+  void selectNominal(int nominal) {
+    customNominalController.clear();
     emit(state.copyWith(
-        selectedNominal: state.selectedNominal == nominal ? 0 : nominal));
+        selectedNominal: nominal, customNominal: 0, nominalFieldVal: ''));
   }
 
-  void selectNominal(int nominal) {
-    emit(state.copyWith(selectedNominal: nominal, customNominal: 0));
+  void customNominal(String string) {
+    int customNominal = 0;
+    if (string.isNotEmpty) {
+      customNominal = int.parse(string);
+    }
+    emit(state.copyWith(
+        selectedNominal: 0,
+        customNominal: customNominal,
+        nominalFieldVal: string));
   }
 
   void clearCustomnominal() {
-    emit(state.copyWith(customNominal: 0));
+    emit(state.copyWith(customNominal: 0, nominalFieldVal: ''));
   }
 
   void topUp() {
@@ -34,25 +43,28 @@ class TopUpState {
   final String selectedBank;
   final int selectedNominal;
   final int customNominal;
+  final String nominalFieldVal;
 
-  TopUpState({
-    required this.banks,
-    this.selectedBank = '',
-    this.selectedNominal = 0,
-    this.customNominal = 0,
-  });
+  TopUpState(
+      {required this.banks,
+      this.selectedBank = '',
+      this.selectedNominal = 0,
+      this.customNominal = 0,
+      this.nominalFieldVal = 'test'});
 
   TopUpState copyWith({
     List<String>? banks,
     String? selectedBank,
     int? selectedNominal,
     int? customNominal,
+    String? nominalFieldVal,
   }) {
     return TopUpState(
       banks: banks ?? this.banks,
       selectedBank: selectedBank ?? this.selectedBank,
       selectedNominal: selectedNominal ?? this.selectedNominal,
       customNominal: customNominal ?? this.customNominal,
+      nominalFieldVal: nominalFieldVal ?? this.nominalFieldVal,
     );
   }
 }
@@ -141,16 +153,20 @@ class TopUpForm extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<TopUpCubit, TopUpState>(
                   builder: (context, state) {
-                    return GridView.builder(
-                      shrinkWrap: true,
+                    final nominals = [
+                      5000,
+                      10000,
+                      25000,
+                      50000,
+                      100000,
+                      150000
+                    ];
+                    return GridView.count(
+                      crossAxisCount: 3,
                       physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 2.5,
-                      ),
-                      itemCount: state.banks.length,
-                      itemBuilder: (context, index) {
-                        final nominal = (index + 1) * 1000;
+                      shrinkWrap: true,
+                      childAspectRatio: 2.5,
+                      children: nominals.map((nominal) {
                         return Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
@@ -168,7 +184,6 @@ class TopUpForm extends StatelessWidget {
                                 cubit.selectNominal(0);
                               } else {
                                 cubit.selectNominal(nominal);
-                                cubit.clearCustomnominal();
                               }
                             },
                             child: Stack(
@@ -177,7 +192,7 @@ class TopUpForm extends StatelessWidget {
                                 Container(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    '$nominal',
+                                    "Rp${nominal.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}",
                                     style: TextStyle(
                                       color: state.selectedNominal == nominal
                                           ? Colors.purple
@@ -207,7 +222,7 @@ class TopUpForm extends StatelessWidget {
                             ),
                           ),
                         );
-                      },
+                      }).toList(),
                     );
                   },
                 ),
@@ -217,13 +232,14 @@ class TopUpForm extends StatelessWidget {
           const SizedBox(height: 16.0),
           BlocBuilder<TopUpCubit, TopUpState>(builder: (context, state) {
             return TextFormField(
-              initialValue: state.customNominal > 0
-                  ? state.customNominal.toStringAsFixed(0)
-                  : '',
+              controller: context.read<TopUpCubit>().customNominalController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if ((value == null || value.isEmpty) &&
+                    state.selectedNominal == 0) {
                   return 'Please enter a nominal value';
-                } else if (int.parse(value) == 0) {
+                } else if (value != null &&
+                    value.isNotEmpty &&
+                    int.parse(value) <= 0) {
                   return 'Please enter a value higher than 0';
                 }
                 return null;
@@ -234,9 +250,7 @@ class TopUpForm extends StatelessWidget {
               ],
               keyboardType: TextInputType.number,
               onChanged: (value) {
-                var val;
-                (value == '') ? (val = 0) : (val = value);
-                context.read<TopUpCubit>().selectNominal(int.parse(val));
+                context.read<TopUpCubit>().customNominal(value);
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -246,7 +260,10 @@ class TopUpForm extends StatelessWidget {
           }),
           const Spacer(),
           ElevatedButton(
-            onPressed: context.watch<TopUpCubit>().state.selectedNominal != 0
+            onPressed: (context.watch<TopUpCubit>().state.selectedNominal !=
+                            0 ||
+                        context.watch<TopUpCubit>().state.customNominal != 0) &&
+                    context.watch<TopUpCubit>().state.selectedBank != ''
                 ? () => context.read<TopUpCubit>().topUp()
                 : null,
             child: Text('Next'),
