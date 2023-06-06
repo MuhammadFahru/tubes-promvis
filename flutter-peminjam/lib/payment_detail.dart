@@ -1,20 +1,19 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
-class PaymentFundingPage extends StatelessWidget {
+class PaymentDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Bayar Angsuran'),
+          title: Text('Detail Pembayaran Angsuran'),
         ),
-        body: PaymentFunding());
+        body: PaymentDetail());
   }
 }
 
-class PaymentFunding extends StatelessWidget {
+class PaymentDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,7 +34,7 @@ class PaymentFunding extends StatelessWidget {
                         top: 16, bottom: 16, left: 16, right: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color(int.parse('0xff613EEA')),
+                      color: Color.fromARGB(255, 228, 228, 228),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,15 +44,15 @@ class PaymentFunding extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                child: Text("Biaya Angsuran",
+                                child: Text("Total Pembayaran:",
                                     style: TextStyle(
-                                        fontSize: 16.0, color: Colors.white))),
+                                        fontSize: 16.0, color: Colors.black))),
                             Container(
                                 child: Text("Rp1.000.000",
                                     style: TextStyle(
                                         fontSize: 30.0,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white))),
+                                        color: Colors.purple))),
                           ],
                         ),
                       ],
@@ -72,7 +71,29 @@ class PaymentFunding extends StatelessWidget {
                     width: 1.0,
                   ),
                 ),
-                child: ComboBoxBank(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            child: Text("Bank BRI",
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.black))),
+                        Container(
+                            child: Text("No. rekening: 12736172",
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.black))),
+                        Container(
+                            child: Text("Nama Rekening: PT Prospera",
+                                style: TextStyle(
+                                    fontSize: 16.0, color: Colors.black)))
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -82,59 +103,13 @@ class PaymentFunding extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
-                Navigator.pushNamed(context, '/paymentDetail');
+                Navigator.pushNamed(context, '/home');
               },
-              child: Text('LANJUTKAN'),
+              child: Text('SUDAH BAYAR'),
             ),
           )
         ],
       ),
-    );
-  }
-}
-
-List<String> listBank = [
-  "Bank Central Asia",
-  "Bank Mandiri",
-  "Bank Jago",
-  "United Overseas Bank",
-  "BCA Syariah",
-  "Bank Negara Indonesia",
-  "Bank Permata",
-  "Bank Syariah Indonesia",
-  "Bank Rakyat Indonesia",
-  "Bank BJB"
-];
-
-class ComboBoxBank extends StatefulWidget {
-  const ComboBoxBank({super.key});
-
-  @override
-  State<ComboBoxBank> createState() => _ComboBoxBankState();
-}
-
-class _ComboBoxBankState extends State<ComboBoxBank> {
-  String? dropdownValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      hint: Text("- Pilih Bank- "),
-      value: dropdownValue,
-      elevation: 16,
-      underline: Container(color: Colors.transparent),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
-      },
-      items: listBank.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
     );
   }
 }
