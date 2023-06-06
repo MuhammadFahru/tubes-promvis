@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FaqController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\LogoutController;
 use App\Http\Controllers\API\Masterdata\MasterdataBankController;
@@ -34,3 +35,6 @@ Route::post('register-investor', [RegisterController::class, 'registerInvestor']
 Route::get('get-masterdata-bank', [MasterdataBankController::class, 'getData']);
 Route::get('get-masterdata-kategori-umkm', [MasterdataKategoriUMKMController::class, 'getData']);
 Route::get('get-masterdata-sektor-umkm', [MasterdataSektorUMKMController::class, 'getData']);
+
+Route::get('get-faq-peminjam', [FaqController::class, 'getDataPeminjam']);
+Route::get('get-faq-investor', [FaqController::class, 'getDataInvestor']);
