@@ -154,7 +154,8 @@ class MainPage extends StatelessWidget {
                               width: 64.0,
                               child: IconButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/');
+                                  Navigator.pushNamed(
+                                      context, '/paymentFunding');
                                 },
                                 iconSize: 48,
                                 icon: Icon(Icons.payment),
@@ -176,150 +177,156 @@ class MainPage extends StatelessWidget {
                     color: Color(int.parse('0xff613EEA')))),
             Stack(
               children: [
-                Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    padding: const EdgeInsets.only(
-                        top: 0, bottom: 8, left: 0, right: 0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      verticalDirection: VerticalDirection.down,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(50.0),
-                                child: Image.network(
-                                  'https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1.jpeg',
-                                  height: 64.0,
-                                  width: 64.0,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/detailFunding');
+                  },
+                  child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      padding: const EdgeInsets.only(
+                          top: 0, bottom: 8, left: 0, right: 0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        verticalDirection: VerticalDirection.down,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.network(
+                                    'https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1.jpeg',
+                                    height: 64.0,
+                                    width: 64.0,
+                                  ),
                                 ),
-                              ),
-                              Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Modal Dagang Warung",
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                    Text("Penjanjian Pendanaan",
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            color: Colors.grey)),
-                                  ]),
-                              Container(
-                                  margin:
-                                      new EdgeInsets.symmetric(horizontal: 0.0),
-                                  decoration: BoxDecoration(
-                                      color: Color(int.parse('0xff613EEA')),
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text("Ongoing",
-                                        style: TextStyle(
-                                            fontSize: 10.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)),
-                                  ))
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Modal Dagang Warung",
+                                          style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black)),
+                                      Text("Penjanjian Pendanaan",
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              color: Colors.grey)),
+                                    ]),
+                                Container(
+                                    margin: new EdgeInsets.symmetric(
+                                        horizontal: 0.0),
+                                    decoration: BoxDecoration(
+                                        color: Color(int.parse('0xff613EEA')),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text("Ongoing",
+                                          style: TextStyle(
+                                              fontSize: 10.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                    ))
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 12.0),
+                                    child: Column(
+                                      children: [
+                                        Text("TOTAL",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("TAGIHAN",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("Rp5.000.000"),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12.0, right: 12.0),
+                                    child: Column(
+                                      children: [
+                                        Text("TOTAL",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("DIBAYAR",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("Rp4.000.000"),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 12.0, right: 12.0),
+                                    child: Column(
+                                      children: [
+                                        Text("TENOR",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("WAKTU",
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("5 Minggu"),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
                             ],
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 12.0),
-                                  child: Column(
-                                    children: [
-                                      Text("TOTAL",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("TAGIHAN",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("Rp5.000.000"),
-                                    ],
-                                  ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: new LinearPercentIndicator(
+                                  width: 300,
+                                  animation: true,
+                                  lineHeight: 20.0,
+                                  animationDuration: 800,
+                                  percent: 0.8,
+                                  center: Text("4 Minggu",
+                                      style: TextStyle(color: Colors.white)),
+                                  linearStrokeCap: LinearStrokeCap.roundAll,
+                                  progressColor: Colors.purple,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 12.0, right: 12.0),
-                                  child: Column(
-                                    children: [
-                                      Text("TOTAL",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("DIBAYAR",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("Rp4.000.000"),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 12.0, right: 12.0),
-                                  child: Column(
-                                    children: [
-                                      Text("TENOR",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("WAKTU",
-                                          style: TextStyle(
-                                              fontSize: 10.0,
-                                              fontWeight: FontWeight.bold)),
-                                      Text("5 Minggu"),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: new LinearPercentIndicator(
-                                width: 300,
-                                animation: true,
-                                lineHeight: 20.0,
-                                animationDuration: 800,
-                                percent: 0.8,
-                                center: Text("4 Minggu",
-                                    style: TextStyle(color: Colors.white)),
-                                linearStrokeCap: LinearStrokeCap.roundAll,
-                                progressColor: Colors.purple,
                               ),
-                            ),
-                            Text("80.0%",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.purple)),
-                          ],
-                        ),
-                      ],
-                    )),
+                              Text("80.0%",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.purple)),
+                            ],
+                          ),
+                        ],
+                      )),
+                ),
               ],
             ),
           ],
@@ -559,7 +566,7 @@ class FundingPage extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(50.0),
                               child: Image.network(
-                                'https://www.harapanrakyat.com/wp-content/uploads/2022/05/Desain-Dapur-warung-Makan-Terbuka-Minimalis-yang-Bersih-dan-Rapi.jpg',
+                                'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
                                 height: 64.0,
                                 width: 64.0,
                               ),
@@ -953,7 +960,8 @@ class ProfilePage extends StatelessWidget {
                 CircleAvatar(
                   radius: 45,
                   // Your profile image or icon can be added here
-                  backgroundImage: AssetImage('assets/image/momo.png'),
+                  backgroundImage: NetworkImage(
+                      "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc"),
                 ),
                 SizedBox(width: 10),
                 Expanded(
@@ -1111,7 +1119,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 onTap: () {
                   // Logic to be executed when the log out tile is pressed
-                  // For example, navigate to log in page, display log out confirmation dialog, etc.
+                  Navigator.pushNamed(context, '/');
                 },
               ),
             ),
@@ -1195,9 +1203,8 @@ class DataPribadi extends StatelessWidget {
             ),
             child: CircleAvatar(
               radius: 45,
-              backgroundImage: AssetImage(
-                'assets/image/momo.png',
-              ),
+              backgroundImage: NetworkImage(
+                  "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc"),
             ),
           ),
           Align(

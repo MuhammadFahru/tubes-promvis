@@ -4,6 +4,8 @@ import 'signup.dart';
 import 'login.dart';
 import 'forgot_password.dart';
 import 'home.dart';
+import 'detail_funding_peminjam.dart';
+import 'payment.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
             '/forgotPassword': (context) => ForgotPasswordPage(),
             '/home': (context) => HomePage(),
             '/signUp': (context) => SignUpPage(),
+            '/detailFunding': (context) => DetailFundingPage(),
+            '/paymentFunding': (context) => PaymentFundingPage()
           },
         ));
   }
