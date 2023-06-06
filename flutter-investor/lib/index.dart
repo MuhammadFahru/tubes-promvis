@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homeScreen.dart';
+import 'portofolio.dart';
+import 'marketplace.dart';
+import 'support.dart';
+import 'profile.dart';
 
 class ScreenCubit extends Cubit<int> {
   ScreenCubit() : super(0);
@@ -14,10 +18,10 @@ class IndexPage extends StatelessWidget {
   IndexPage({Key? key}) : super(key: key);
 
   final List<Widget> screens = [
-    HomeScreen(),
-    PortfolioScreen(),
-    MarketplaceScreen(),
-    SupportScreen(),
+    const HomeScreen(),
+    const PortofolioScreen(),
+    const MarketplaceScreen(),
+    const SupportScreen(),
     ProfileScreen(),
   ];
 
@@ -73,150 +77,6 @@ class IndexPage extends StatelessWidget {
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class PortfolioScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text('Portofolio'),
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () {
-            // Navigate to profile page
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications page
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Portfolio Screen',
-            style: TextStyle(fontSize: 24),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MarketplaceScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text('Marketplace'),
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () {
-            // Navigate to profile page
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications page
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Marketplace Screen',
-            style: TextStyle(fontSize: 24),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SupportScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text('Support'),
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () {
-            // Navigate to profile page
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications page
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Support Screen',
-            style: TextStyle(fontSize: 24),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text('Profile'),
-        leading: IconButton(
-          icon: Icon(Icons.person),
-          onPressed: () {
-            // Navigate to profile page
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications page
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Profile Screen',
-            style: TextStyle(fontSize: 24),
-          ),
-        ],
       ),
     );
   }

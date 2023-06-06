@@ -14,8 +14,8 @@ class WalletCubit extends Cubit<double> {
 
 /// Portfolio Cubit
 /// temp value for now
-class PortfolioCubit extends Cubit<List<String>> {
-  PortfolioCubit() : super([]);
+class PortfolioSumCubit extends Cubit<List<String>> {
+  PortfolioSumCubit() : super([]);
 
   void updatePortfolio(List<String> portfolioList) {
     emit(portfolioList);
@@ -42,7 +42,8 @@ class HomeScreen extends StatelessWidget {
         BlocProvider<WalletCubit>(
           create: (context) => WalletCubit(),
         ),
-        BlocProvider<PortfolioCubit>(create: (context) => PortfolioCubit()),
+        BlocProvider<PortfolioSumCubit>(
+            create: (context) => PortfolioSumCubit()),
         BlocProvider<OngoingFundingCubit>(
             create: (context) => OngoingFundingCubit()),
       ],
@@ -75,10 +76,11 @@ class HomeScreen extends StatelessWidget {
               margin: EdgeInsets.all(4),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(int.parse('0xff613EEA'))),
+                shape: BoxShape.circle,
+              ),
               child: IconButton(
                 icon: const Icon(Icons.notifications_outlined),
+                color: Color(int.parse('0xff613EEA')),
                 iconSize: 30,
                 onPressed: () {
                   // Navigate to profile page
@@ -267,7 +269,7 @@ class WalletModule extends StatelessWidget {
 class PortfolioList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PortfolioCubit, List<String>>(
+    return BlocBuilder<PortfolioSumCubit, List<String>>(
       builder: (context, portfolioList) {
         return ListView.builder(
           shrinkWrap: true,
