@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homeScreen.dart';
 import 'portofolio.dart';
-import 'marketplace.dart';
+import 'funding.dart';
 import 'support.dart';
 import 'profile.dart';
 
@@ -20,7 +20,7 @@ class IndexPage extends StatelessWidget {
   final List<Widget> screens = [
     const HomeScreen(),
     const PortofolioScreen(),
-    const MarketplaceScreen(),
+    const FundingScreen(),
     const SupportScreen(),
     ProfileScreen(),
   ];
