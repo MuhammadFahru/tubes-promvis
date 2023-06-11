@@ -211,10 +211,25 @@ class FundingScreen extends StatelessWidget {
           child: ListView.builder(
               primary: true,
               shrinkWrap: true,
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               itemCount: state.length,
               itemBuilder: (context, index) {
                 final item = state[index];
+                final now = DateTime.now();
+
+                String getTimeDif() {
+                  final dif = item.deadline.difference(now);
+                  if (dif.inDays >= 1) {
+                    return "${dif.inDays} Hari";
+                  } else if (dif.inHours >= 1) {
+                    return "${dif.inHours} Jam";
+                  } else if (dif.inMinutes >= 1) {
+                    return "${dif.inMinutes} Menit";
+                  } else {
+                    return "<1 Menit";
+                  }
+                }
+
                 return Card(
                   margin:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -236,7 +251,7 @@ class FundingScreen extends StatelessWidget {
                                 width: 64.0,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +259,7 @@ class FundingScreen extends StatelessWidget {
                                   // Name of the funding
                                   Text(
                                     item.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -253,36 +268,47 @@ class FundingScreen extends StatelessWidget {
                                   // desc of the funding
                                   Text(
                                     item.desc,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
                                       color: Colors.grey,
                                     ),
                                   ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.location_pin),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        item.address,
+                                        style: const TextStyle(
+                                          fontSize: 10.0,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
-
-                            ///
-                            ///TODO make an if to check if its lunas or not
-                            ///
                             Container(
                               padding: const EdgeInsets.all(4.0),
                               decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: const Text(
-                                "Lunas",
-                                style: TextStyle(
-                                  fontSize: 10.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                  color: Color(int.parse('0xffC5B6FF')),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: Color(int.parse('0xff613EEA')))),
+                              child: Icon(
+                                Icons.add,
+                                color: Color(int.parse('0xff613EEA')),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -294,13 +320,11 @@ class FundingScreen extends StatelessWidget {
                                 "TENOR WAKTU", "${item.tenor} Minggu"),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              ///
-                              ///TODO make this change color and text based on it is done or not
                               child: LinearPercentIndicator(
                                 lineHeight: 20.0,
                                 percent:
@@ -309,7 +333,7 @@ class FundingScreen extends StatelessWidget {
                                   item.plafond != item.terkumpul
                                       ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
                                       : "Selesai",
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                                 barRadius: const Radius.circular(16),
                                 progressColor: item.plafond != item.terkumpul
@@ -318,17 +342,14 @@ class FundingScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 5),
-
-                            ///
-                            ///TODO change color as well
-                            ///
                             Text(
-                              "${(item.terkumpul / item.plafond * 100).toDouble()}%",
+                              getTimeDif(),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: item.plafond != item.terkumpul
-                                    ? Color(int.parse('0xff613EEA'))
-                                    : Colors.green,
+                                color:
+                                    item.deadline.difference(now).inHours >= 1
+                                        ? Color(int.parse('0xff613EEA'))
+                                        : Colors.red,
                               ),
                             ),
                           ],
