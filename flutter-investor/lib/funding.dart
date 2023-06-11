@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 ///
 ///Modif sesuai api
@@ -52,20 +53,8 @@ class FundingItem {
   }
 }
 
-enum SortingOption {
-  deadlineAsc,
-  deadlineDesc,
-  amountLeftAsc,
-  amountLeftDesc,
-}
-
 class FundingCubit extends Cubit<List<FundingItem>> {
-  List<FundingItem> allItems = _generateList();
-  String searchQuery = '';
-  List<String> selectedTags = [];
-  SortingOption sortingOption = SortingOption.deadlineAsc;
-
-  FundingCubit(this.allItems) : super(allItems);
+  FundingCubit() : super(_generateList());
 
   ///
   ///This is a pplaceholder generator
@@ -85,57 +74,35 @@ class FundingCubit extends Cubit<List<FundingItem>> {
             deadline: DateTime(2020)));
   }
 
-  void searchFunding(String query) {
-    searchQuery = query.toLowerCase();
-    emit(_getFilteredAndSortedFundingItems());
-  }
-
-  void toggleTagFilter(String tag) {
-    if (selectedTags.contains(tag)) {
-      selectedTags.remove(tag);
+  void search(String query) {
+    if (query.isEmpty) {
+      emit(_generateList());
     } else {
-      selectedTags.add(tag);
+      final filteredList = _generateList().where((item) {
+        final name = item.name.toLowerCase();
+        return name.contains(query);
+      }).toList();
+      emit(filteredList);
     }
-    emit(_getFilteredAndSortedFundingItems());
   }
 
-  void setSortingOption(SortingOption option) {
-    sortingOption = option;
-    emit(_getFilteredAndSortedFundingItems());
+  void sortByDeadline(bool isAsc) {
+    final sortedList = [...state];
+    sortedList.sort((a, b) => a.deadline.compareTo(b.deadline));
+    if (!isAsc) {
+      sortedList.reversed;
+    }
+    emit(sortedList);
   }
 
-  List<FundingItem> _getFilteredAndSortedFundingItems() {
-    List<FundingItem> filteredItems = allItems.where((item) {
-      // Apply search query filter
-      if (searchQuery.isNotEmpty &&
-          !item.name.toLowerCase().contains(searchQuery)) {
-        return false;
-      }
-
-      // Apply tag filter
-      if (selectedTags.isNotEmpty &&
-          !selectedTags.any((tag) => item.tags.contains(tag))) {
-        return false;
-      }
-
-      return true;
-    }).toList();
-
-    // Apply sorting option
-    filteredItems.sort((a, b) {
-      switch (sortingOption) {
-        case SortingOption.deadlineAsc:
-          return a.deadline.compareTo(b.deadline);
-        case SortingOption.deadlineDesc:
-          return b.deadline.compareTo(a.deadline);
-        case SortingOption.amountLeftAsc:
-          return (a.plafond - a.terkumpul).compareTo((b.plafond - b.terkumpul));
-        case SortingOption.amountLeftDesc:
-          return (b.plafond - b.terkumpul).compareTo((a.plafond - a.terkumpul));
-      }
-    });
-
-    return filteredItems;
+  void sortByFundingLeft(bool isAsc) {
+    final sortedList = [...state];
+    sortedList.sort(
+        (a, b) => (a.plafond - a.terkumpul).compareTo(b.plafond - b.terkumpul));
+    if (!isAsc) {
+      sortedList.reversed;
+    }
+    emit(sortedList);
   }
 }
 
@@ -158,77 +125,219 @@ class FundingScreen extends StatelessWidget {
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
-        body: SingleChildScrollView(
-            child: Column(
+        body: Column(
           children: [
-            _buildSearchBar(),
+            _buildSearchBar(context),
+            _buildSortButtons(context),
+            const SizedBox(
+              height: 10,
+            ),
+            _buildCardListView(context),
           ],
-        )),
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Search...',
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
         ),
       ),
     );
   }
 
-  Widget _buildSortingOptions() {
+  ///
+  ///TODO make the searchbar works
+  ///
+
+  Widget _buildSearchBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Sort By:'),
-          DropdownButton<String>(
-            value: 'Ending Soon',
-            onChanged: (newValue) {},
-            items: <String>['Ending Soon', 'Amount Left', 'Other Options']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+      child: TextField(
+        onChanged: (query) {
+          context.read<FundingCubit>().search(query.toLowerCase());
+        },
+        decoration: InputDecoration(
+          hintText: 'Search...',
+          prefixIcon: Icon(Icons.search),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSortButtons(BuildContext context) {
+    bool isAscending = true;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            final newAscending = !isAscending;
+            context.read<FundingCubit>().sortByDeadline(newAscending);
+          },
+          child: Text('Sort by Deadline ${isAscending ? '↑' : '↓'}'),
+        ),
+        SizedBox(width: 8.0),
+        ElevatedButton(
+          onPressed: () {
+            final newAscending = !isAscending;
+            context.read<FundingCubit>().sortByFundingLeft(newAscending);
+          },
+          child: Text('Sort by Plafond - Terkumpul ${isAscending ? '↑' : '↓'}'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDataColumn(String title, String value) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 10.0,
+            fontWeight: FontWeight.bold,
           ),
-        ],
-      ),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 10.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildTags() {
-    return Container(
-      height: 40,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        children: [
-          _buildTag('Food', false),
-          _buildTag('Fashion', true),
-          _buildTag('Farm', false),
-        ],
-      ),
-    );
-  }
+  Widget _buildCardListView(BuildContext context) {
+    return BlocBuilder<FundingCubit, List<FundingItem>>(
+        builder: (context, state) {
+      return Expanded(
+          child: ListView.builder(
+              primary: true,
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: state.length,
+              itemBuilder: (context, index) {
+                final item = state[index];
+                return Card(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(50.0),
+                              child: Image.network(
+                                'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
+                                height: 64.0,
+                                width: 64.0,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Name of the funding
+                                  Text(
+                                    item.name,
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  // desc of the funding
+                                  Text(
+                                    item.desc,
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
-  Widget _buildTag(String tag, bool isSelected) {
-    final color = isSelected ? Colors.blue : Colors.grey;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Chip(
-        label: Text(tag),
-        backgroundColor: color,
-      ),
-    );
+                            ///
+                            ///TODO make an if to check if its lunas or not
+                            ///
+                            Container(
+                              padding: const EdgeInsets.all(4.0),
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: const Text(
+                                "Lunas",
+                                style: TextStyle(
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildDataColumn(
+                                "TOTAL PLAFOND", "Rp${item.plafond},00"),
+                            _buildDataColumn(
+                                "BAGI HASIL", "${item.bagiHasil}%"),
+                            _buildDataColumn(
+                                "TENOR WAKTU", "${item.tenor} Minggu"),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              ///
+                              ///TODO make this change color and text based on it is done or not
+                              child: LinearPercentIndicator(
+                                lineHeight: 20.0,
+                                percent:
+                                    (item.terkumpul / item.plafond).toDouble(),
+                                center: Text(
+                                  item.plafond != item.terkumpul
+                                      ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
+                                      : "Selesai",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                barRadius: const Radius.circular(16),
+                                progressColor: item.plafond != item.terkumpul
+                                    ? Color(int.parse('0xff613EEA'))
+                                    : Colors.green,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+
+                            ///
+                            ///TODO change color as well
+                            ///
+                            Text(
+                              "${(item.terkumpul / item.plafond * 100).toDouble()}%",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: item.plafond != item.terkumpul
+                                    ? Color(int.parse('0xff613EEA'))
+                                    : Colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }));
+    });
   }
 }
