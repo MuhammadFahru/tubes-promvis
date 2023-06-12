@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class PasswordSentPage extends StatelessWidget {
-  const PasswordSentPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final email = ModalRoute.of(context)!.settings.arguments as String;

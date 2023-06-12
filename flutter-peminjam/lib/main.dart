@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Prospera',
           theme: ThemeData(primarySwatch: Colors.deepPurple),
+          debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
             '/': (context) => LoginPage(),

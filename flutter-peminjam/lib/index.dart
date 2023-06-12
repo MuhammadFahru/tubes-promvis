@@ -22,8 +22,8 @@ class IndexPage extends StatelessWidget {
   final List<Widget> screens = [
     const MainPage(),
     const FundingPage(),
-    SupportPage(),
-    ProfilePage(),
+    const SupportPage(),
+    const ProfilePage(),
   ];
 
   @override
