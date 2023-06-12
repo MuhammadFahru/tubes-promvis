@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'payment_detail.dart';
 
 class PaymentFundingPage extends StatelessWidget {
   @override
@@ -82,7 +83,12 @@ class PaymentFunding extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
-                Navigator.pushNamed(context, '/paymentDetail');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentDetailPage(),
+                  ),
+                );
               },
               child: Text('LANJUTKAN'),
             ),
@@ -118,23 +124,25 @@ class _ComboBoxBankState extends State<ComboBoxBank> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      hint: Text("- Pilih Bank- "),
-      value: dropdownValue,
-      elevation: 16,
-      underline: Container(color: Colors.transparent),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
-      },
-      items: listBank.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+    return Material(
+      child: DropdownButton<String>(
+        hint: Text("- Pilih Bank- "),
+        value: dropdownValue,
+        elevation: 16,
+        underline: Container(color: Colors.transparent),
+        onChanged: (String? value) {
+          // This is called when the user selects an item.
+          setState(() {
+            dropdownValue = value!;
+          });
+        },
+        items: listBank.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
     );
   }
 }

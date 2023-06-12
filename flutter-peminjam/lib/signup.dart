@@ -26,6 +26,20 @@ class _SignupState extends State<Signup> {
   bool _showPassword = false;
   bool _showRepeatPassword = false;
 
+  // Data Pribadi
+  TextEditingController nikController = TextEditingController();
+  TextEditingController namaController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController repeatPasswordController = TextEditingController();
+  String selectedBank = '';
+  TextEditingController noRekeningController = TextEditingController();
+
+  // Data Usaha
+  TextEditingController namaUsahaController = TextEditingController();
+  TextEditingController emailUsahaController = TextEditingController();
+  TextEditingController alamatUsahaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +62,7 @@ class _SignupState extends State<Signup> {
                   Container(
                     alignment: Alignment.center,
                     child: const Text(
-                      'Sign Up',
+                      'Sign Up UMKM',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30.0,
@@ -58,6 +72,13 @@ class _SignupState extends State<Signup> {
                   ),
                   const SizedBox(height: 35.0),
                 ],
+              ),
+
+              // Label Data Pribadi
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 20.0, bottom: 8.0),
+                child: Container(child: Text("Data Pribadi")),
               ),
 
               // NIK
@@ -75,6 +96,7 @@ class _SignupState extends State<Signup> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: nikController,
                     decoration: InputDecoration(
                       contentPadding:
                           const EdgeInsets.symmetric(vertical: 10.0),
@@ -105,6 +127,7 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 child: TextField(
+                  controller: namaController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(10),
                     hintText: 'Nama',
@@ -132,6 +155,7 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(10),
                     hintText: 'Email',
@@ -162,6 +186,7 @@ class _SignupState extends State<Signup> {
                   alignment: Alignment.centerRight,
                   children: [
                     TextField(
+                      controller: passwordController,
                       obscureText: !_showPassword,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10),
@@ -215,6 +240,7 @@ class _SignupState extends State<Signup> {
                   alignment: Alignment.centerRight,
                   children: [
                     TextField(
+                      controller: repeatPasswordController,
                       obscureText: !_showRepeatPassword,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10),
@@ -265,6 +291,11 @@ class _SignupState extends State<Signup> {
                   items: bank,
                   label: "Pilih Bank",
                   hint: "Pilih Bank",
+                  onChanged: (String? value) {
+                    setState(() {
+                      selectedBank = value ?? "";
+                    });
+                  },
                   popupTitle: Container(
                     padding: EdgeInsets.all(14.0),
                     child: Text(
@@ -318,6 +349,7 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 child: TextField(
+                  controller: noRekeningController,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -333,9 +365,97 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               SizedBox(
-                height: 14.0,
+                height: 24.0,
               ),
+              // Label Data Pribadi
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 20.0, bottom: 8.0),
+                child: Container(child: Text("Data Usaha")),
+              ),
+              // Nama Usaha
+              Container(
+                width: 200.0,
+                height: 47.0,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 242, 240, 240),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 238, 235, 235),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: namaUsahaController,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    hintText: 'Nama Usaha',
+                    hintStyle: TextStyle(
+                      color: Color(int.parse('0xffBDBDBD')),
+                      fontFamily: "Inter",
+                      fontSize: 15,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14.0),
 
+              // Email Usaha
+              Container(
+                width: 200.0,
+                height: 47.0,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 242, 240, 240),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 238, 235, 235),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: emailUsahaController,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    hintText: 'Email Usaha',
+                    hintStyle: TextStyle(
+                      color: Color(int.parse('0xffBDBDBD')),
+                      fontFamily: "Inter",
+                      fontSize: 15,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14.0),
+
+              // Alamat Lokasi Usaha
+              Container(
+                width: 200.0,
+                height: 47.0,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 242, 240, 240),
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 238, 235, 235),
+                    width: 1.0,
+                  ),
+                ),
+                child: TextField(
+                  controller: alamatUsahaController,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(10),
+                    hintText: 'Alamat Lokasi Usaha',
+                    hintStyle: TextStyle(
+                      color: Color(int.parse('0xffBDBDBD')),
+                      fontFamily: "Inter",
+                      fontSize: 15,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 14.0),
               // Checkbox
               CheckboxListTile(
                 controlAffinity: ListTileControlAffinity.leading,
@@ -370,13 +490,30 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginPage();
-                        },
-                      ),
-                    );
+                    String nik = nikController.text;
+                    String nama = namaController.text;
+                    String email = emailController.text;
+                    String password = passwordController.text;
+                    String repeatPassword = repeatPasswordController.text;
+                    String bank = selectedBank;
+                    String noRekening = noRekeningController.text;
+
+                    String namaUsaha = namaUsahaController.text;
+                    String emailUsaha = emailUsahaController.text;
+                    String alamatUsaha = alamatUsahaController.text;
+
+                    String message =
+                        'DATA PRIBADI\nNIK: $nik\nNama: $nama\nEmail: $email\nPassword: $password\nRepeat Password: $repeatPassword\nBank: $bank\nNo Rekening: $noRekening\n\nDATA USAHA\nNama Usaha: $namaUsaha\nEmail Usaha: $emailUsaha\nAlamat Usaha: $alamatUsaha';
+
+                    _showSnackBar(context, message);
+
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return LoginPage();
+                    //     },
+                    //   ),
+                    // );
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -392,5 +529,10 @@ class _SignupState extends State<Signup> {
         ),
       ),
     );
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

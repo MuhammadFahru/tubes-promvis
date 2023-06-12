@@ -20,7 +20,7 @@ class IndexPage extends StatelessWidget {
   IndexPage({Key? key}) : super(key: key);
 
   final List<Widget> screens = [
-    const MainPage(),
+    const HomePage(),
     const FundingPage(),
     SupportPage(),
     ProfilePage(),

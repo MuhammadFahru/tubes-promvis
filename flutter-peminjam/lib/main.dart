@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Prospera',
           theme: ThemeData(primarySwatch: Colors.deepPurple),
           initialRoute: '/',
