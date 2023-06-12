@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data_usaha.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'data_pribadi.dart';
@@ -126,7 +127,7 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DataPribadi(),
+                          builder: (context) => DataUsaha(),
                         ),
                       );
                     },
