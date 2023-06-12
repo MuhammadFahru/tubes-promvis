@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Prospera',
           theme: ThemeData(primarySwatch: Colors.deepPurple),
+          debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
             '/': (context) => LoginPage(),
