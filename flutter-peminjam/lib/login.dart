@@ -30,7 +30,7 @@ class LoginState extends Equatable {
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginState(email: '', id: '', userData: {}));
 
-  void performLogin(String email, String password) {
+  bool performLogin(String email, String password) {
     final email = 'fakemail';
     final id = '1';
     final userData = {'email': email, 'age': 0};
@@ -41,6 +41,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     emit(newState);
+    return true;
   }
 }
 
@@ -65,7 +66,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: const Text(
-                  'Log In UMKM',
+                  'Log In',
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
@@ -166,8 +167,9 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                     final email = emailController.text;
                     final password = passwordController.text;
-                    loginCubit.performLogin(email, password);
-                    Navigator.pushNamed(context, '/home');
+                    if (loginCubit.performLogin(email, password)) {
+                      Navigator.pushNamed(context, '/index');
+                    }
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -178,22 +180,21 @@ class LoginPage extends StatelessWidget {
                     ),
                   )),
               const SizedBox(height: 16.0),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    // Navigate to forgot sign up page
-                    Navigator.pushNamed(context, '/signUp');
-                  },
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Color(int.parse('0xff613EEA')),
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Signup();
+                      },
                     ),
-                  ),
+                  );
+                },
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(int.parse('0xff613EEA'))),
                 ),
               ),
             ],

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'signup.dart';
 import 'login.dart';
 import 'forgot_password.dart';
-import 'home.dart';
-import 'detail_funding_peminjam.dart';
-import 'payment.dart';
-import 'payment_detail.dart';
+import 'index.dart';
+import 'password_sent.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [BlocProvider<LoginCubit>(create: (_) => LoginCubit())],
+        providers: [
+          BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
+        ],
         child: MaterialApp(
           title: 'Prospera',
           theme: ThemeData(primarySwatch: Colors.deepPurple),
@@ -27,11 +28,9 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => LoginPage(),
             '/forgotPassword': (context) => ForgotPasswordPage(),
-            '/home': (context) => HomePage(),
-            '/signUp': (context) => SignUpPage(),
-            '/detailFunding': (context) => DetailFundingPage(),
-            '/paymentFunding': (context) => PaymentFundingPage(),
-            '/paymentDetail': (context) => PaymentDetailPage()
+            '/signUp': (context) => Signup(),
+            '/passwordSent': (context) => PasswordSentPage(),
+            '/index': (context) => IndexPage(),
           },
         ));
   }

@@ -1,77 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-// import file
-import 'profil.dart';
-import 'support.dart';
-import 'funding.dart';
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  static List<Widget> _widgetOptions = <Widget>[
-    MainPage(),
-    FundingPage(),
-    SupportPage(),
-    ProfilePage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Prospera'),
-        centerTitle: true,
-      ),
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: Colors.purple),
-            activeIcon: Icon(Icons.home, color: Colors.purple),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.request_page_outlined,
-              color: Colors.purple,
-            ),
-            activeIcon: Icon(Icons.request_page, color: Colors.purple),
-            label: 'Funding',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined, color: Colors.purple),
-            activeIcon: Icon(Icons.message, color: Colors.purple),
-            label: 'Support',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, color: Colors.purple),
-            activeIcon: Icon(Icons.person, color: Colors.purple),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.purple,
-        onTap: _onItemTapped,
-      ),
-    );
-  }
-}
 
 // HOME SCREEN
 class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

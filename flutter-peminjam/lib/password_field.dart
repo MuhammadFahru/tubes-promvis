@@ -13,10 +13,6 @@ class PasswordVisibilityCubit extends Cubit<bool> {
   }
 }
 
-///
-///Kalau tidak butuh validasi
-///
-
 class PasswordTextField extends StatelessWidget {
   const PasswordTextField({Key? key}) : super(key: key);
 

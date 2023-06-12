@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class FundingPage extends StatelessWidget {
+  const FundingPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

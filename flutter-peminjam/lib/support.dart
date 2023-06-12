@@ -4,6 +4,7 @@ import 'chat_support.dart';
 import 'faq_support.dart';
 
 class SupportPage extends StatelessWidget {
+  // const SupportPage({Key? key}) : super(key: key);
   final List<Tab> tabs = [
     Tab(text: 'Chat'),
     Tab(text: 'FAQs'),
