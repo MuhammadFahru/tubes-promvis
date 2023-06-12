@@ -53,25 +53,47 @@ class FundingItem {
   }
 }
 
+enum SortOption {
+  deadlineAsc,
+  deadlineDesc,
+  toTargetAsc,
+  toTargetDesc,
+}
+
 class FundingCubit extends Cubit<List<FundingItem>> {
   FundingCubit() : super(_generateList());
+  SortOption selectedSortOption = SortOption.deadlineAsc;
 
   ///
   ///This is a pplaceholder generator
   ///
   static List<FundingItem> _generateList() {
-    return List.generate(
-        10,
-        (index) => FundingItem(
-            name: 'funding $index',
-            desc: 'funding ke-$index',
-            address: 'alamat $index',
-            imgPath: '',
-            plafond: 200,
-            bagiHasil: 12.5,
-            tenor: 50,
-            terkumpul: 100,
-            deadline: DateTime(2020)));
+    var temp = List.generate(
+            10,
+            (index) => FundingItem(
+                name: 'funding $index',
+                desc: 'funding ke-$index',
+                address: 'alamat $index',
+                imgPath: '',
+                plafond: 200,
+                bagiHasil: 12.5,
+                tenor: 50,
+                terkumpul: 100,
+                deadline: DateTime(2025))) +
+        List.generate(
+            10,
+            (index) => FundingItem(
+                name: 'funding $index',
+                desc: 'funding ke-$index',
+                address: 'alamat $index',
+                imgPath: '',
+                plafond: 300,
+                bagiHasil: 12.5,
+                tenor: 50,
+                terkumpul: 100,
+                deadline: DateTime(2024)));
+    temp.sort((a, b) => a.deadline.compareTo(b.deadline));
+    return temp;
   }
 
   void search(String query) {
@@ -86,23 +108,23 @@ class FundingCubit extends Cubit<List<FundingItem>> {
     }
   }
 
-  void sortByDeadline(bool isAsc) {
-    final sortedList = [...state];
-    sortedList.sort((a, b) => a.deadline.compareTo(b.deadline));
-    if (!isAsc) {
-      sortedList.reversed;
-    }
-    emit(sortedList);
-  }
+  void sortFundingItems(SortOption option) {
+    state.sort((a, b) {
+      switch (option) {
+        case SortOption.deadlineAsc:
+          return a.deadline.compareTo(b.deadline);
+        case SortOption.deadlineDesc:
+          return b.deadline.compareTo(a.deadline);
+        case SortOption.toTargetAsc:
+          return (a.plafond - a.terkumpul).compareTo((b.plafond - b.terkumpul));
+        case SortOption.toTargetDesc:
+          return (b.plafond - b.terkumpul).compareTo((a.plafond - a.terkumpul));
+        default:
+          return 0;
+      }
+    });
 
-  void sortByFundingLeft(bool isAsc) {
-    final sortedList = [...state];
-    sortedList.sort(
-        (a, b) => (a.plafond - a.terkumpul).compareTo(b.plafond - b.terkumpul));
-    if (!isAsc) {
-      sortedList.reversed;
-    }
-    emit(sortedList);
+    emit([...state]);
   }
 }
 
@@ -127,10 +149,19 @@ class FundingScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            _buildSearchBar(context),
-            _buildSortButtons(context),
-            const SizedBox(
-              height: 10,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(child: _buildSearchBar(context)),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  _buildSortButtons(context),
+                ],
+              ),
             ),
             _buildCardListView(context),
           ],
@@ -144,43 +175,77 @@ class FundingScreen extends StatelessWidget {
   ///
 
   Widget _buildSearchBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        onChanged: (query) {
-          context.read<FundingCubit>().search(query.toLowerCase());
-        },
-        decoration: InputDecoration(
-          hintText: 'Search...',
-          prefixIcon: Icon(Icons.search),
-        ),
-      ),
+    return BlocBuilder<FundingCubit, List<FundingItem>>(
+      builder: (context, state) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: TextField(
+            onChanged: (query) {
+              context.read<FundingCubit>().search(query.toLowerCase());
+            },
+            style: TextStyle(
+              color: Colors.purple, // Set the text color to purple
+            ),
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              prefixIcon: Icon(Icons.search),
+              border: InputBorder.none, // Remove the default border
+            ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildSortButtons(BuildContext context) {
-    bool isAscending = true;
+    return BlocBuilder<FundingCubit, List<FundingItem>>(
+        builder: (context, state) {
+      DropdownMenuItem<SortOption> buildSortDropdownItem(
+          SortOption option, String text) {
+        return DropdownMenuItem<SortOption>(value: option, child: Text(text));
+      }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            final newAscending = !isAscending;
-            context.read<FundingCubit>().sortByDeadline(newAscending);
+      List<DropdownMenuItem<SortOption>> items = [
+        buildSortDropdownItem(SortOption.deadlineAsc, 'Deadline ↑'),
+        buildSortDropdownItem(SortOption.deadlineDesc, 'Deadline ↓'),
+        buildSortDropdownItem(SortOption.toTargetAsc, 'toTarget ↑'),
+        buildSortDropdownItem(SortOption.toTargetDesc, 'toTarget ↓')
+      ];
+
+      return Container(
+        decoration: BoxDecoration(
+            color: Color(int.parse('0xff613EEA')),
+            borderRadius: BorderRadius.circular(16.0)),
+        child: DropdownButton<SortOption>(
+          underline: const SizedBox(),
+          style: const TextStyle(color: Colors.white),
+          dropdownColor: Color(int.parse('0xff613EEA')),
+          borderRadius: BorderRadius.circular(16.0),
+          value: context.read<FundingCubit>().selectedSortOption,
+          onChanged: (SortOption? newValue) {
+            if (newValue != null) {
+              context.read<FundingCubit>().sortFundingItems(newValue);
+              context.read<FundingCubit>().selectedSortOption = newValue;
+            }
           },
-          child: Text('Sort by Deadline ${isAscending ? '↑' : '↓'}'),
-        ),
-        SizedBox(width: 8.0),
-        ElevatedButton(
-          onPressed: () {
-            final newAscending = !isAscending;
-            context.read<FundingCubit>().sortByFundingLeft(newAscending);
+          items: items,
+          selectedItemBuilder: (BuildContext context) {
+            return items.map((DropdownMenuItem<SortOption> item) {
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: item.child),
+              );
+            }).toList();
           },
-          child: Text('Sort by Plafond - Terkumpul ${isAscending ? '↑' : '↓'}'),
         ),
-      ],
-    );
+      );
+    });
   }
 
   Widget _buildDataColumn(String title, String value) {
@@ -230,134 +295,146 @@ class FundingScreen extends StatelessWidget {
                   }
                 }
 
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                return GestureDetector(
+                    onTap: () {
+                      ///
+                      ///Navigator.pushNamed(context, '', arguments:)
+                      ///
+                      ///
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(50.0),
-                              child: Image.network(
-                                'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
-                                height: 64.0,
-                                width: 64.0,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Name of the funding
-                                  Text(
-                                    item.name,
-                                    style: const TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
+                            Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.network(
+                                    'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
+                                    height: 64.0,
+                                    width: 64.0,
                                   ),
-                                  // desc of the funding
-                                  Text(
-                                    item.desc,
-                                    style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.min,
+                                ),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Icon(Icons.location_pin),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
+                                      // Name of the funding
                                       Text(
-                                        item.address,
+                                        item.name,
                                         style: const TextStyle(
-                                          fontSize: 10.0,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      // desc of the funding
+                                      Text(
+                                        item.desc,
+                                        style: const TextStyle(
+                                          fontSize: 12.0,
                                           color: Colors.grey,
                                         ),
                                       ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const Icon(Icons.location_pin),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            item.address,
+                                            style: const TextStyle(
+                                              fontSize: 10.0,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(4.0),
-                              decoration: BoxDecoration(
-                                  color: Color(int.parse('0xffC5B6FF')),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: Color(int.parse('0xff613EEA')))),
-                              child: Icon(
-                                Icons.add,
-                                color: Color(int.parse('0xff613EEA')),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _buildDataColumn(
-                                "TOTAL PLAFOND", "Rp${item.plafond},00"),
-                            _buildDataColumn(
-                                "BAGI HASIL", "${item.bagiHasil}%"),
-                            _buildDataColumn(
-                                "TENOR WAKTU", "${item.tenor} Minggu"),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: LinearPercentIndicator(
-                                lineHeight: 20.0,
-                                percent:
-                                    (item.terkumpul / item.plafond).toDouble(),
-                                center: Text(
-                                  item.plafond != item.terkumpul
-                                      ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
-                                      : "Selesai",
-                                  style: const TextStyle(color: Colors.white),
                                 ),
-                                barRadius: const Radius.circular(16),
-                                progressColor: item.plafond != item.terkumpul
-                                    ? Color(int.parse('0xff613EEA'))
-                                    : Colors.green,
-                              ),
+                                Container(
+                                  padding: const EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                      color: Color(int.parse('0xffC5B6FF')),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color:
+                                              Color(int.parse('0xff613EEA')))),
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Color(int.parse('0xff613EEA')),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(width: 5),
-                            Text(
-                              getTimeDif(),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    item.deadline.difference(now).inHours >= 1
-                                        ? Color(int.parse('0xff613EEA'))
-                                        : Colors.red,
-                              ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _buildDataColumn(
+                                    "TOTAL PLAFOND", "Rp${item.plafond},00"),
+                                _buildDataColumn(
+                                    "BAGI HASIL", "${item.bagiHasil}%"),
+                                _buildDataColumn(
+                                    "TENOR WAKTU", "${item.tenor} Minggu"),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: LinearPercentIndicator(
+                                    lineHeight: 20.0,
+                                    percent: (item.terkumpul / item.plafond)
+                                        .toDouble(),
+                                    center: Text(
+                                      item.plafond != item.terkumpul
+                                          ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
+                                          : "Selesai",
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                    ),
+                                    barRadius: const Radius.circular(16),
+                                    progressColor:
+                                        item.plafond != item.terkumpul
+                                            ? Color(int.parse('0xff613EEA'))
+                                            : Colors.green,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  getTimeDif(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        item.deadline.difference(now).inHours >=
+                                                1
+                                            ? Color(int.parse('0xff613EEA'))
+                                            : Colors.red,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
+                      ),
+                    ));
               }));
     });
   }
