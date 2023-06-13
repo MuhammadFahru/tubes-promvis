@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /**
  * silahkan modif sesuai API
@@ -72,9 +74,10 @@ class PortofolioScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
+          title: Text(
             'Portofolio',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: GoogleFonts.inter(
+                color: primaryTextColor, fontWeight: bold, fontSize: 16),
           ),
         ),
         body: Column(
@@ -92,7 +95,7 @@ class SummaryModule extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.purple,
+        color: primaryColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

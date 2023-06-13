@@ -30,6 +30,7 @@ class IndexPage extends StatelessWidget {
     return BlocProvider<ScreenCubit>(
       create: (context) => ScreenCubit(),
       child: Scaffold(
+        backgroundColor: Color(0xffDBDBDB),
         body: BlocBuilder<ScreenCubit, int>(
           builder: (context, activeScreenIndex) {
             return screens[activeScreenIndex];
@@ -38,10 +39,14 @@ class IndexPage extends StatelessWidget {
         bottomNavigationBar: BlocBuilder<ScreenCubit, int>(
           builder: (context, activeScreenIndex) {
             return Container(
+              padding: EdgeInsets.symmetric(vertical: 15),
               decoration: BoxDecoration(
+                  color: Colors.white,
                   border:
-                      Border(bottom: BorderSide(color: Colors.grey, width: 3))),
+                      Border(top: BorderSide(color: Colors.grey, width: 1))),
               child: BottomNavigationBar(
+                elevation: 0,
+                backgroundColor: Colors.white,
                 selectedItemColor: Color(int.parse('0xff613EEA')),
                 selectedIconTheme:
                     IconThemeData(color: Color(int.parse('0xff613EEA'))),

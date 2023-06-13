@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter_app/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ///
 ///Modif sesuai api
@@ -142,9 +144,10 @@ class FundingScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
+          title: Text(
             'Funding Marketplace',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: GoogleFonts.inter(
+                color: primaryTextColor, fontWeight: bold, fontSize: 16),
           ),
         ),
         body: Column(
@@ -253,16 +256,18 @@ class FundingScreen extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
-            fontSize: 10.0,
-            fontWeight: FontWeight.bold,
+          style: GoogleFonts.inter(
+            fontSize: 12.0,
+            fontWeight: semiBold,
+            color: primaryTextColor,
           ),
         ),
         Text(
           value,
           style: TextStyle(
             fontSize: 10.0,
-            fontWeight: FontWeight.bold,
+            fontWeight: medium,
+            color: primaryTextColor,
           ),
         ),
       ],
@@ -332,18 +337,19 @@ class FundingScreen extends StatelessWidget {
                                       // Name of the funding
                                       Text(
                                         item.name,
-                                        style: const TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 14.0,
+                                          fontWeight: semiBold,
+                                          color: primaryTextColor,
                                         ),
                                       ),
                                       // desc of the funding
                                       Text(
                                         item.desc,
-                                        style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.grey,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 10.0,
+                                          color: secondaryTextColor,
+                                          fontWeight: light,
                                         ),
                                       ),
                                       Row(
@@ -357,9 +363,10 @@ class FundingScreen extends StatelessWidget {
                                           ),
                                           Text(
                                             item.address,
-                                            style: const TextStyle(
-                                              fontSize: 10.0,
-                                              color: Colors.grey,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 8.0,
+                                              color: secondaryTextColor,
+                                              fontWeight: light,
                                             ),
                                           ),
                                         ],
@@ -372,12 +379,10 @@ class FundingScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       color: Color(int.parse('0xffC5B6FF')),
                                       shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color:
-                                              Color(int.parse('0xff613EEA')))),
+                                      border: Border.all(color: primaryColor)),
                                   child: Icon(
                                     Icons.add,
-                                    color: Color(int.parse('0xff613EEA')),
+                                    color: primaryColor,
                                   ),
                                 ),
                               ],
@@ -407,13 +412,15 @@ class FundingScreen extends StatelessWidget {
                                       item.plafond != item.terkumpul
                                           ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
                                           : "Selesai",
-                                      style:
-                                          const TextStyle(color: Colors.white),
+                                      style: GoogleFonts.inter(
+                                          color: Colors.white,
+                                          fontWeight: regular,
+                                          fontSize: 10),
                                     ),
                                     barRadius: const Radius.circular(16),
                                     progressColor:
                                         item.plafond != item.terkumpul
-                                            ? Color(int.parse('0xff613EEA'))
+                                            ? primaryColor
                                             : Colors.green,
                                   ),
                                 ),
@@ -425,7 +432,7 @@ class FundingScreen extends StatelessWidget {
                                     color:
                                         item.deadline.difference(now).inHours >=
                                                 1
-                                            ? Color(int.parse('0xff613EEA'))
+                                            ? secondaryTextColor
                                             : Colors.red,
                                   ),
                                 ),
