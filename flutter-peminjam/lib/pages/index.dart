@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_app/theme.dart';
 
 // import file
 import 'profil.dart';

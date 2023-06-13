@@ -1,4 +1,5 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -71,7 +72,7 @@ class ForgotPasswordPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 25),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(int.parse('0xff613EEA')),
+                  backgroundColor: primaryColor,
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),

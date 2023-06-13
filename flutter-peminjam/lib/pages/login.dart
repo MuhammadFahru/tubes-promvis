@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_app/theme.dart';
 import 'password_field.dart';
 import 'signup.dart';
 
@@ -147,7 +148,7 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     'Forgot your password?',
                     style: TextStyle(
-                      color: Color(int.parse('0xff613EEA')),
+                      color: primaryColor,
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -158,7 +159,7 @@ class LoginPage extends StatelessWidget {
               // login button
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(int.parse('0xff613EEA')),
+                    backgroundColor: primaryColor,
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
@@ -190,12 +191,11 @@ class LoginPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(
+                child: Text('Sign Up',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color(int.parse('0xff613EEA'))),
-                ),
+                      color: primaryColor,
+                    )),
               ),
             ],
           ),
