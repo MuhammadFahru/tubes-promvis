@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/index.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Wallet Cubit
 /// crosscheck value later
@@ -54,9 +56,10 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
+          title: Text(
             'Home',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            style: GoogleFonts.inter(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
           ),
           leading: Container(
             margin: EdgeInsets.all(4),
@@ -105,10 +108,10 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Portfolio',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(int.parse('0xff613EEA')),
-                        ),
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                            fontSize: 12),
                       ),
                       TextButton(
                           onPressed: () {
@@ -116,7 +119,10 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: Text(
                             'more',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                                fontSize: 12),
                           ))
                     ],
                   )),
@@ -132,10 +138,10 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Ongoing Funding',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(int.parse('0xff613EEA')),
-                        ),
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                            fontSize: 12),
                       ),
                       TextButton(
                           onPressed: () {
@@ -143,7 +149,10 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: Text(
                             'more',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                                fontSize: 12),
                           ))
                     ],
                   )),
@@ -168,7 +177,7 @@ class WalletModule extends StatelessWidget {
               const EdgeInsets.only(top: 16, bottom: 32, left: 16, right: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color(int.parse('0xff613EEA')),
+            color: primaryColor,
           ),
           child: Column(
             children: [
