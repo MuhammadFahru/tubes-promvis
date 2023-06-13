@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/detail_funding_investor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_app/theme.dart';
@@ -302,10 +303,12 @@ class FundingScreen extends StatelessWidget {
 
                 return GestureDetector(
                     onTap: () {
-                      ///
-                      ///Navigator.pushNamed(context, '', arguments:)
-                      ///
-                      ///
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailFundingPage(),
+                        ),
+                      );
                     },
                     child: Card(
                       margin: const EdgeInsets.symmetric(
@@ -404,26 +407,42 @@ class FundingScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: LinearPercentIndicator(
-                                    lineHeight: 20.0,
-                                    percent: (item.terkumpul / item.plafond)
-                                        .toDouble(),
-                                    center: Text(
-                                      item.plafond != item.terkumpul
-                                          ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
-                                          : "Selesai",
-                                      style: GoogleFonts.inter(
-                                          color: Colors.white,
-                                          fontWeight: regular,
-                                          fontSize: 10),
-                                    ),
-                                    barRadius: const Radius.circular(16),
-                                    progressColor:
+                                    child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    LinearPercentIndicator(
+                                      lineHeight: 20.0,
+                                      percent: (item.terkumpul / item.plafond)
+                                          .toDouble(),
+                                      center: Text(
                                         item.plafond != item.terkumpul
-                                            ? primaryColor
-                                            : Colors.green,
-                                  ),
-                                ),
+                                            ? "${((item.terkumpul / item.plafond) * 100).toStringAsFixed(4 - ((item.terkumpul / item.plafond) * 100).toInt().toString().length)}%"
+                                            : "Selesai",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.white,
+                                            fontWeight: regular,
+                                            fontSize: 10),
+                                      ),
+                                      barRadius: const Radius.circular(16),
+                                      progressColor:
+                                          item.plafond != item.terkumpul
+                                              ? primaryColor
+                                              : Colors.green,
+                                    ),
+                                    SizedBox(
+                                      height: 3,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        "Rp${item.terkumpul},00 / Rp${item.plafond},00",
+                                        style: GoogleFonts.inter(
+                                            color: primaryTextColor,
+                                            fontWeight: semiBold,
+                                            fontSize: 10),
+                                      ),
+                                    )
+                                  ],
+                                )),
                                 const SizedBox(width: 5),
                                 Text(
                                   getTimeDif(),

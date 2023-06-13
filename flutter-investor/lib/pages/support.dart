@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/detail_faq.dart';
 
 ///
 ///Modif sesuai api
@@ -127,15 +128,14 @@ class _FAQWidgetState extends State<FAQWidget> {
               final subtitle = faqSubtitles[faqs.indexOf(faq)];
 
               return InkWell(
-                onTap: () {
-                  // Navigasikan ke halaman detail FAQ dengan argumen FAQ yang dipilih
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ,
-                  //   ),
-                  // );
-                },
+                 onTap: () {
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailFAQ(),
+                                ),
+                              );
+                  },
                 child: ListTile(
                   leading: Icon(icon),
                   title: Text(faq),
