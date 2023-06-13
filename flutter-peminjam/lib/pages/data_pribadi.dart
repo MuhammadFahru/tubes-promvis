@@ -46,55 +46,42 @@ class DataPribadi extends StatelessWidget {
                 Text(
                   'Informasi Akun',
                   style: TextStyle(
-                    fontSize: 20, // Ubah ukuran font menjadi 20
+                    fontSize: 20,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
                 SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          height: 100,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
+                        Text(
+                          'Change Profile Picture',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Change Profile Picture',
-                                  style: TextStyle(
-                                    fontSize: 16, // Ubah ukuran font menjadi 16
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(width: 16),
-                                CircleAvatar(
-                                  radius: 40,
-                                  // Your profile image or icon can be added here
-                                  backgroundImage: NetworkImage(
-                                    "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc",
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ),
+                        SizedBox(width: 16),
+                        CircleAvatar(
+                          radius: 40,
+                          // Your profile image or icon can be added here
+                          backgroundImage: NetworkImage(
+                            "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc",
                           ),
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
                 SizedBox(height: 16),
                 Row(

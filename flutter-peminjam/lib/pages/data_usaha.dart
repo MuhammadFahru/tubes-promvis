@@ -60,7 +60,7 @@ class DataUsaha extends StatelessWidget {
                           'Change Profile Picture',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         SizedBox(width: 16),

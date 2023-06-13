@@ -28,17 +28,6 @@ class DetailFAQ extends StatelessWidget {
               width: double.infinity,
               height: 200,
             ),
-            SizedBox(height: 8),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Tanggal',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
             SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
