@@ -107,7 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_name.png',
+                      'icons/icon_name.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -161,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_username.png',
+                      'icons/icon_username.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -215,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_email.png',
+                      'icons/icon_email.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -269,7 +269,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_password.png',
+                      'icons/icon_password.png',
                       width: 17,
                     ),
                     SizedBox(

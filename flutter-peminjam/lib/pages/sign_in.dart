@@ -101,7 +101,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_email.png',
+                      'icons/icon_email.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -155,7 +155,7 @@ class _SignInPageState extends State<SignInPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_password.png',
+                      'icons/icon_password.png',
                       width: 17,
                     ),
                     SizedBox(
