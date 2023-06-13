@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
             create: (context) => OngoingFundingCubit()),
       ],
       child: Scaffold(
-        backgroundColor: Color(int.parse('0xffDBDBDB')),
+        backgroundColor: backgroundColor6,
         appBar: AppBar(
           toolbarHeight: 60,
           backgroundColor: Colors.white,
@@ -59,7 +59,9 @@ class HomeScreen extends StatelessWidget {
           title: Text(
             'Home',
             style: GoogleFonts.inter(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                color: primaryTextColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
           ),
           leading: Container(
             margin: EdgeInsets.all(4),
@@ -187,15 +189,20 @@ class WalletModule extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Total Wallet',
-                        style: TextStyle(fontSize: 14.0, color: Colors.white),
+                        style: GoogleFonts.inter(
+                            fontSize: 14.0,
+                            color: Colors.white,
+                            fontWeight: regular),
                       ),
                       const SizedBox(height: 8.0),
                       Text(
                         'Rp$walletValue,00',
-                        style: const TextStyle(
-                            fontSize: 24.0, color: Colors.white),
+                        style: GoogleFonts.inter(
+                            fontSize: 24.0,
+                            color: Colors.white,
+                            fontWeight: bold),
                       ),
                     ]),
               ),
@@ -213,15 +220,18 @@ class WalletModule extends StatelessWidget {
                             Navigator.pushNamed(context, '/topUp');
                           },
                           icon: Icon(Icons.add),
-                          color: Color(int.parse('0xff613EEA')),
+                          color: primaryColor,
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
+                      Text(
                         'Top Up',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                        style: GoogleFonts.inter(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: regular),
                       )
                     ],
                   ),
@@ -233,15 +243,18 @@ class WalletModule extends StatelessWidget {
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.arrow_downward_rounded),
-                          color: Color(int.parse('0xff613EEA')),
+                          color: primaryColor,
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
+                      Text(
                         'Withdraw',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                        style: GoogleFonts.inter(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: regular),
                       )
                     ],
                   ),
@@ -253,15 +266,18 @@ class WalletModule extends StatelessWidget {
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.sticky_note_2),
-                          color: Color(int.parse('0xff613EEA')),
+                          color: primaryColor,
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
+                      Text(
                         'History',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                        style: GoogleFonts.inter(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: regular),
                       )
                     ],
                   ),
