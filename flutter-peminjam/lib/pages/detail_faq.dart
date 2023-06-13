@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DetailFAQ extends StatelessWidget {
+  final String faq;
+  final List<String> faqDescriptions;
+
+  DetailFAQ({required this.faq, required this.faqDescriptions});
+
   @override
   Widget build(BuildContext context) {
+    final String description = faqDescriptions.firstWhere(
+      (element) => element.contains(faq),
+      orElse: () => '',
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail FAQ'),
@@ -14,7 +24,7 @@ class DetailFAQ extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Judul Berita',
+                faq,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -23,7 +33,7 @@ class DetailFAQ extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Image.network(
-              "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc",
+              'https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1.jpeg',
               fit: BoxFit.cover,
               width: double.infinity,
               height: 200,
@@ -32,7 +42,7 @@ class DetailFAQ extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Deskripsi berita...',
+                description,
                 style: TextStyle(
                   fontSize: 18,
                 ),

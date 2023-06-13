@@ -32,6 +32,14 @@ class _FAQWidgetState extends State<FAQWidget> {
     'Lorem ipsum dolor sit amet 5',
   ];
 
+  final List<String> faqDescriptions = [
+    'Description for How do I create an account?',
+    'Description for How can I reset my password?',
+    'Description for Lorem ipsum dolor sit amet 1',
+    'Description for Lorem ipsum dolor sit amet 2',
+    'Description for Lorem ipsum dolor sit amet 3',
+  ];
+
   List<String> filteredFaqs = [];
   TextEditingController searchController = TextEditingController();
 
@@ -81,11 +89,11 @@ class _FAQWidgetState extends State<FAQWidget> {
 
               return InkWell(
                 onTap: () {
-                  // Navigasikan ke halaman detail FAQ dengan argumen FAQ yang dipilih
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetailFAQ(),
+                      builder: (context) =>
+                          DetailFAQ(faq: faq, faqDescriptions: faqDescriptions),
                     ),
                   );
                 },
