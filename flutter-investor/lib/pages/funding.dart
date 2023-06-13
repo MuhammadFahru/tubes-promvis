@@ -94,7 +94,19 @@ class FundingCubit extends Cubit<List<FundingItem>> {
                 bagiHasil: 12.5,
                 tenor: 50,
                 terkumpul: 100,
-                deadline: DateTime(2024)));
+                deadline: DateTime(2024))) +
+        [
+          FundingItem(
+              name: 'funding 9',
+              desc: 'funding ke-9',
+              address: 'alamat 9',
+              imgPath: '',
+              plafond: 300,
+              bagiHasil: 12.5,
+              tenor: 50,
+              terkumpul: 300,
+              deadline: DateTime(2023))
+        ];
     temp.sort((a, b) => a.deadline.compareTo(b.deadline));
     return temp;
   }
@@ -326,12 +338,12 @@ class FundingScreen extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(50.0),
                                   child: Image.network(
-                                    'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
+                                    'https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1.jpeg',
                                     height: 64.0,
                                     width: 64.0,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 15),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -350,9 +362,9 @@ class FundingScreen extends StatelessWidget {
                                       Text(
                                         item.desc,
                                         style: GoogleFonts.inter(
-                                          fontSize: 10.0,
+                                          fontSize: 12.0,
                                           color: secondaryTextColor,
-                                          fontWeight: light,
+                                          fontWeight: medium,
                                         ),
                                       ),
                                       Row(
@@ -360,16 +372,19 @@ class FundingScreen extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Icon(Icons.location_pin),
+                                          const Icon(
+                                            Icons.location_pin,
+                                            size: 15,
+                                          ),
                                           const SizedBox(
                                             width: 5,
                                           ),
                                           Text(
                                             item.address,
                                             style: GoogleFonts.inter(
-                                              fontSize: 8.0,
+                                              fontSize: 10.0,
                                               color: secondaryTextColor,
-                                              fontWeight: light,
+                                              fontWeight: regular,
                                             ),
                                           ),
                                         ],
@@ -429,7 +444,7 @@ class FundingScreen extends StatelessWidget {
                                               ? primaryColor
                                               : Colors.green,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3,
                                     ),
                                     Center(
