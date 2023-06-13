@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'password_field.dart';
 import 'signup.dart';
 
@@ -57,6 +59,7 @@ class LoginPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => PasswordVisibilityCubit(),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -65,11 +68,11 @@ class LoginPage extends StatelessWidget {
               // Judul
               Container(
                 alignment: Alignment.center,
-                child: const Text(
+                child: Text(
                   'Log In',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
+                  style: GoogleFonts.inter(
+                    fontSize: 30.0,
+                    fontWeight: semiBold,
                   ),
                 ),
               ),
@@ -77,7 +80,7 @@ class LoginPage extends StatelessWidget {
               // Email
               Container(
                 decoration: BoxDecoration(
-                  color: Color(int.parse('0xffF6F6F6')),
+                  color: backgroundColor6,
                   borderRadius: BorderRadius.circular(8.0),
                   border: Border.all(
                     color: Colors.grey,
@@ -90,8 +93,9 @@ class LoginPage extends StatelessWidget {
                       contentPadding: const EdgeInsets.all(10),
                       labelText: 'Email',
                       labelStyle: TextStyle(
-                          color: Color(int.parse('0xffBDBDBD')),
-                          fontWeight: FontWeight.bold)),
+                          color: secondaryTextColor,
+                          fontWeight: medium,
+                          fontSize: 16)),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -114,8 +118,9 @@ class LoginPage extends StatelessWidget {
                         contentPadding: const EdgeInsets.all(10),
                         labelText: 'Password',
                         labelStyle: TextStyle(
-                            color: Color(int.parse('0xffBDBDBD')),
-                            fontWeight: FontWeight.bold),
+                            color: secondaryTextColor,
+                            fontWeight: medium,
+                            fontSize: 16),
                         suffixIcon: GestureDetector(
                           onTapDown: (_) => context
                               .read<PasswordVisibilityCubit>()
@@ -146,11 +151,10 @@ class LoginPage extends StatelessWidget {
                   },
                   child: Text(
                     'Forgot your password?',
-                    style: TextStyle(
-                      color: Color(int.parse('0xff613EEA')),
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: GoogleFonts.inter(
+                        color: primaryColor,
+                        fontSize: 16.0,
+                        fontWeight: medium),
                   ),
                 ),
               ),
@@ -158,7 +162,7 @@ class LoginPage extends StatelessWidget {
               // login button
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(int.parse('0xff613EEA')),
+                    backgroundColor: primaryColor,
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
@@ -173,10 +177,12 @@ class LoginPage extends StatelessWidget {
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: const Text(
+                    child: Text(
                       'Log In',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.inter(
+                          color: primaryTextColor,
+                          fontWeight: semiBold,
+                          fontSize: 16),
                     ),
                   )),
               const SizedBox(height: 16.0),
@@ -192,9 +198,8 @@ class LoginPage extends StatelessWidget {
                 },
                 child: Text(
                   'Sign Up',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(int.parse('0xff613EEA'))),
+                  style: GoogleFonts.inter(
+                      fontWeight: medium, color: primaryColor, fontSize: 16),
                 ),
               ),
             ],
