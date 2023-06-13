@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'detail_faq.dart';
+
 class FAQWidget extends StatefulWidget {
   @override
   _FAQWidgetState createState() => _FAQWidgetState();
@@ -80,12 +82,12 @@ class _FAQWidgetState extends State<FAQWidget> {
               return InkWell(
                 onTap: () {
                   // Navigasikan ke halaman detail FAQ dengan argumen FAQ yang dipilih
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ,
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailFAQ(),
+                    ),
+                  );
                 },
                 child: ListTile(
                   leading: Icon(icon),
