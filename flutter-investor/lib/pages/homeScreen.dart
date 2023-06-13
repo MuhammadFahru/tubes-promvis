@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/index.dart';
+import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Wallet Cubit

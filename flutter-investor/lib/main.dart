@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'login.dart';
-import 'forgot_password.dart';
-import 'password_sent.dart';
-import 'signup.dart';
-import 'index.dart';
-import 'topUp.dart';
+import 'package:flutter_app/pages/login.dart';
+import 'package:flutter_app/pages/forgot_password.dart';
+import 'package:flutter_app/pages/password_sent.dart';
+import 'package:flutter_app/pages/signup.dart';
+import 'package:flutter_app/pages/index.dart';
+import 'package:flutter_app/pages/topUp.dart';
 
 void main() {
   runApp(const MyApp());

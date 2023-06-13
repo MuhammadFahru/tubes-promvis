@@ -66,8 +66,8 @@ class User extends Authenticatable
         return $this->belongsTo(MasterdataSektorUMKM::class, 'sektor_umkm_id', 'id');
     }
 
-    public function walletInvestor()
+    public function wallet()
     {
-        return $this->hasOne(WalletInvestor::class, 'users_id', 'id');
+        return $this->hasOne(Wallet::class, 'users_id', 'id');
     }
 }

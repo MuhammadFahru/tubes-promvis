@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wallet_investor', function (Blueprint $table) {
+        Schema::create('wallet_history', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('users_id')->nullable();
-            $table->double('balance', 8, 2)->default(0);
+            $table->bigInteger('wallet_id')->nullable();
+            $table->string('transaction_type');
+            $table->double('amount', 8, 2)->default(0);
+            $table->double('previous_balance', 8, 2)->default(0);
+            $table->double('current_balance', 8, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wallet_investor');
+        Schema::dropIfExists('wallet_history');
     }
 };

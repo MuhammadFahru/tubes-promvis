@@ -22,13 +22,19 @@ class RegisterController extends Controller
     public function registerPeminjam(Request $request)
     {
         try {
-            // $request->validate([
-            //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            //     'password' => ['required', 'string'],
-            //     'pin' => ['integer', 'max:6'],
-            //     'nik' => ['max:16'],
-            //     'nama' => ['required', 'string', 'max:255'],
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', new Password]
+            ]);
+
+            if ($validator->fails()) {
+                return ResponseFormatter::error([
+                    'message' => 'Validation Failed',
+                    'error' => $validator->errors(),
+                ],'Validation', 422);
+            }
 
             $user = new User();
             $user->email = $request->email;

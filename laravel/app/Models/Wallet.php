@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WalletInvestor extends Model
+class Wallet extends Model
 {
     use HasFactory;
 
-    public $table = 'wallet_investor';
+    public $table = 'wallet';
 
     protected $guarded = ['id'];
 
@@ -18,8 +18,8 @@ class WalletInvestor extends Model
         return $this->belongsTo(User::class, 'users_id', 'id');
     }
 
-    public function walletInvestorHistory()
+    public function walletHistory()
     {
-        return $this->hasMany(WalletInvestorHistory::class, 'wallet_investor_id', 'id');
+        return $this->hasMany(WalletHistory::class, 'wallet_id', 'id');
     }
 }

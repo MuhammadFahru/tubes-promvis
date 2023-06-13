@@ -19,16 +19,16 @@ class UserSeeder extends Seeder
         User::insert(array(
             [
                 'email' => 'admin@gmail.com',
-                'password' => Hash::make("@dm1N#123"),
-                'salt_pw' => '@dm1N#123',
+                'password' => Hash::make("admin12345"),
+                'salt_pw' => 'admin12345',
                 'roles' => 'Admin',
                 'is_active' => true,
                 'nama' => 'Admin',
             ],
             [
                 'email' => 'verifikator@gmail.com',
-                'password' => Hash::make("v3r1Fikat0r#123"),
-                'salt_pw' => 'v3r1Fikat0r#123',
+                'password' => Hash::make("verifikator123"),
+                'salt_pw' => 'verifikator123',
                 'roles' => 'Verifikator',
                 'is_active' => true,
                 'nama' => 'Verifikator',
