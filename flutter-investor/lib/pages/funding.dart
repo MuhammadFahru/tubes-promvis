@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/detail_funding_investor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_app/theme.dart';
@@ -302,10 +303,12 @@ class FundingScreen extends StatelessWidget {
 
                 return GestureDetector(
                     onTap: () {
-                      ///
-                      ///Navigator.pushNamed(context, '', arguments:)
-                      ///
-                      ///
+                     Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailFundingPage(),
+                                ),
+                              );
                     },
                     child: Card(
                       margin: const EdgeInsets.symmetric(

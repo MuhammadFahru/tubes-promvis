@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/data_pribadi.dart';
+import 'package:flutter_app/pages/detail_faq.dart';
+import 'package:flutter_app/pages/profile_setting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///
@@ -92,7 +95,12 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    // Navigates to Settings page
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DataPribadi(),
+                                ),
+                              );
                   },
                 ),
               ),
@@ -107,8 +115,13 @@ class ProfileScreen extends StatelessWidget {
                       Icon(Icons.arrow_forward_ios),
                     ],
                   ),
-                  onTap: () {
-                    // Navigates to Settings page
+                 onTap: () {
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Settings(),
+                                ),
+                              );
                   },
                 ),
               ),
@@ -145,7 +158,12 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    // Navigates to FAQs page
+                    Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailFAQ(),
+                                ),
+                              );
                   },
                 ),
               ),
