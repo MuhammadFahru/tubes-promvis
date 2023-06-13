@@ -130,36 +130,6 @@ class HomeScreen extends StatelessWidget {
                   )),
               SizedBox(height: 8.0),
               PortfolioList(),
-              SizedBox(height: 16.0),
-
-              //ongoing funding section
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Ongoing Funding',
-                        style: GoogleFonts.inter(
-                            fontWeight: FontWeight.bold,
-                            color: primaryColor,
-                            fontSize: 12),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            context.read<ScreenCubit>().updateScreen(1);
-                          },
-                          child: Text(
-                            'more',
-                            style: GoogleFonts.inter(
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                                fontSize: 12),
-                          ))
-                    ],
-                  )),
-              SizedBox(height: 8.0),
-              OngoingFundingList(),
             ],
           ),
         ),
