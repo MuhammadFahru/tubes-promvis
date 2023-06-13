@@ -212,8 +212,8 @@ class FundingScreen extends StatelessWidget {
       List<DropdownMenuItem<SortOption>> items = [
         buildSortDropdownItem(SortOption.deadlineAsc, 'Deadline ↑'),
         buildSortDropdownItem(SortOption.deadlineDesc, 'Deadline ↓'),
-        buildSortDropdownItem(SortOption.toTargetAsc, 'toTarget ↑'),
-        buildSortDropdownItem(SortOption.toTargetDesc, 'toTarget ↓')
+        buildSortDropdownItem(SortOption.toTargetAsc, 'Sisa ↑'),
+        buildSortDropdownItem(SortOption.toTargetDesc, 'Sisa ↓')
       ];
 
       return Container(
