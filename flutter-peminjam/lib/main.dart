@@ -11,6 +11,7 @@ import 'package:flutter_app/pages/forgot_password.dart';
 import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_app/pages/password_sent.dart';
 import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/pages/topUp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
             '/signUp': (context) => Signup(),
             '/passwordSent': (context) => PasswordSentPage(),
             '/index': (context) => IndexPage(),
+            '/topUp': (context) => TopUpPage(),
           },
         ));
   }

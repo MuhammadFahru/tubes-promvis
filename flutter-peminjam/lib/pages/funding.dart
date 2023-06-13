@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'form_funding.dart';
+import 'package:flutter_app/theme.dart';
 
 class FundingItem {}
 
@@ -31,7 +32,7 @@ class FundingPage extends StatelessWidget {
             ),
             body: Container(
               width: double.infinity,
-              color: Color.fromARGB(255, 213, 213, 213),
+              color: backgroundColor6,
               child: Column(
                 children: [
                   Stack(
@@ -44,7 +45,7 @@ class FundingPage extends StatelessWidget {
                             top: 16, bottom: 16, left: 16, right: 16),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Color(int.parse('0xff613EEA')),
+                          color: primaryColor,
                         ),
                         child: Center(
                             child: Row(
@@ -69,7 +70,7 @@ class FundingPage extends StatelessWidget {
                                   },
                                   iconSize: 36,
                                   icon: Icon(Icons.add),
-                                  color: Color(int.parse('0xff613EEA')),
+                                  color: primaryColor,
                                 ),
                               ),
                             ])),
@@ -136,8 +137,7 @@ class FundingPage extends StatelessWidget {
                                         margin: new EdgeInsets.symmetric(
                                             horizontal: 0.0),
                                         decoration: BoxDecoration(
-                                            color:
-                                                Color(int.parse('0xff613EEA')),
+                                            color: primaryColor,
                                             borderRadius:
                                                 BorderRadius.circular(10.0)),
                                         child: Padding(
@@ -232,13 +232,13 @@ class FundingPage extends StatelessWidget {
                                           style:
                                               TextStyle(color: Colors.white)),
                                       linearStrokeCap: LinearStrokeCap.roundAll,
-                                      progressColor: Colors.purple,
+                                      progressColor: primaryColor,
                                     ),
                                   ),
                                   Text("80.0%",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.purple)),
+                                          color: primaryColor)),
                                 ],
                               ),
                             ],

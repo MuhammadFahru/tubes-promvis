@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);
@@ -8,42 +10,38 @@ class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
+        elevation: 0,
+        title: Text(
+          "Forgot Password",
+          style: GoogleFonts.inter(
+              color: Colors.black, fontWeight: semiBold, fontSize: 24),
+        ),
+        backgroundColor: Colors.white,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const SizedBox(
-                  width: 95,
-                ),
-                const Center(
-                  child: Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
             const SizedBox(height: 16.0),
-            const Center(
+            Center(
               child: Text(
                 'Enter your email and we’ll send you a link',
+                style: GoogleFonts.inter(
+                    color: Colors.black, fontSize: 12, fontWeight: regular),
               ),
             ),
-            const Center(
-              child: Text('to reset your password.'),
+            Center(
+              child: Text(
+                'to reset your password.',
+                style: GoogleFonts.inter(
+                    color: Colors.black, fontSize: 12, fontWeight: regular),
+              ),
             ),
             const SizedBox(height: 16.0),
             // email field
@@ -61,9 +59,10 @@ class ForgotPasswordPage extends StatelessWidget {
                 decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(10),
                     labelText: 'Email',
-                    labelStyle: TextStyle(
-                        color: Color(int.parse('0xffBDBDBD')),
-                        fontWeight: FontWeight.bold)),
+                    labelStyle: GoogleFonts.inter(
+                        color: secondaryTextColor,
+                        fontWeight: medium,
+                        fontSize: 16)),
               ),
             ),
             const Spacer(),
@@ -71,7 +70,7 @@ class ForgotPasswordPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 25),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(int.parse('0xff613EEA')),
+                  backgroundColor: primaryColor,
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
@@ -90,10 +89,12 @@ class ForgotPasswordPage extends StatelessWidget {
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: const Text(
+                  child: Text(
                     'Send code',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.inter(
+                        color: primaryTextColor,
+                        fontWeight: semiBold,
+                        fontSize: 16),
                   ),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_support.dart';
@@ -37,9 +38,9 @@ class SupportPage extends StatelessWidget {
                 Tab(text: 'Chat'),
                 Tab(text: 'FAQs'),
               ],
-              indicatorColor: Colors.deepPurple,
+              indicatorColor: primaryColor,
               indicatorWeight: 3.0,
-              labelColor: Colors.deepPurple,
+              labelColor: primaryColor,
               unselectedLabelColor: Colors.black,
             ),
           ),
