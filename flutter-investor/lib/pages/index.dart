@@ -21,7 +21,7 @@ class IndexPage extends StatelessWidget {
     const HomeScreen(),
     const PortofolioScreen(),
     const FundingScreen(),
-    const SupportScreen(),
+    SupportScreen(),
     ProfileScreen(),
   ];
 
