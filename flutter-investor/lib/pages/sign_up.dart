@@ -10,12 +10,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController nameController = TextEditingController(text: '');
-
+  TextEditingController namaController = TextEditingController(text: '');
   TextEditingController usernameController = TextEditingController(text: '');
-
   TextEditingController emailController = TextEditingController(text: '');
-
   TextEditingController passwordController = TextEditingController(text: '');
 
   bool isLoading = false;
@@ -30,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
       });
 
       if (await authProvider.register(
-        name: nameController.text,
+        name: namaController.text,
         username: usernameController.text,
         email: emailController.text,
         password: passwordController.text,
@@ -70,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 2,
             ),
             Text(
-              'Register and Happy Shoping',
+              'Register and Happy Invesment',
               style: subtitleTextStyle,
             ),
           ],
@@ -100,14 +97,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_name.png',
+                      'icons/icon_name.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -116,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: TextFormField(
                         style: primaryTextStyle,
-                        controller: nameController,
+                        controller: namaController,
                         decoration: InputDecoration.collapsed(
                           hintText: 'Your Full Name',
                           hintStyle: subtitleTextStyle,
@@ -154,14 +151,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_username.png',
+                      'icons/icon_username.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -208,14 +205,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_email.png',
+                      'icons/icon_email.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -262,14 +259,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_password.png',
+                      'icons/icon_password.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -349,7 +346,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     return Scaffold(
-      backgroundColor: backgroundColor1,
+      backgroundColor: backgroundColor6,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_app/providers/auth_provider.dart';
+
 import 'package:flutter_app/pages/home.dart';
 import 'package:flutter_app/pages/sign_in.dart';
 import 'package:flutter_app/pages/sign_up.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_app/pages/login.dart';
 import 'package:flutter_app/pages/forgot_password.dart';
 import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_app/pages/password_sent.dart';
-import 'package:flutter_app/providers/auth_provider.dart';
 import 'package:flutter_app/pages/topUp.dart';
 
 void main() {

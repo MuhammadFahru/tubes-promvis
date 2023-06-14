@@ -22,31 +22,31 @@ class RegisterController extends Controller
     public function registerPeminjam(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => ['required', 'string', 'max:255'],
-                'username' => ['required', 'string', 'max:255', 'unique:users'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', new Password]
-            ]);
-
-            if ($validator->fails()) {
-                return ResponseFormatter::error([
-                    'message' => 'Validation Failed',
-                    'error' => $validator->errors(),
-                ],'Validation', 422);
-            }
+//            $validator = Validator::make($request->all(), [
+//                'name' => ['required', 'string', 'max:255'],
+//                'username' => ['required', 'string', 'max:255', 'unique:users'],
+//                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//                'password' => ['required', 'string', new Password]
+//            ]);
+//
+//            if ($validator->fails()) {
+//                return ResponseFormatter::error([
+//                    'message' => 'Validation Failed',
+//                    'error' => $validator->errors(),
+//                ],'Validation', 422);
+//            }
 
             $user = new User();
+            $user->nik = $request->nik;
+            $user->nama = $request->nama;
             $user->email = $request->email;
+            $user->no_handphone = $request->no_handphone;
             $user->salt_pw = $request->password;
             $user->password = Hash::make($request->password);
             $user->salt_pin = $request->pin;
             $user->pin = Hash::make($request->pin);
             $user->roles = 'Peminjam';
             $user->is_active = 1;
-            $user->nik = $request->nik;
-            $user->nama = $request->nama;
-            $user->no_handphone = $request->no_handphone;
             $user->foto = $request->foto;
             $user->bank_id = $request->bank_id;
             $user->no_rekening = $request->no_rekening;
@@ -96,14 +96,6 @@ class RegisterController extends Controller
     public function registerInvestor(Request $request)
     {
         try {
-            // $request->validate([
-            //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            //     'password' => ['required', 'string', new Password],
-            //     'pin' => ['integer', 'max:6'],
-            //     'nik' => ['max:16'],
-            //     'nama' => ['required', 'string', 'max:255'],
-            // ]);
-
             $user = new User();
             $user->email = $request->email;
             $user->salt_pw = $request->password;

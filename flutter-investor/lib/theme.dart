@@ -13,6 +13,7 @@ Color backgroundColor3 = Color(0xff242231);
 Color backgroundColor4 = Color(0xff252836);
 Color backgroundColor5 = Color(0xff2B2844);
 Color backgroundColor6 = Color(0xF1F1F1);
+Color backgroundColor7 = Color.fromARGB(255, 224, 224, 230);
 Color primaryTextColor = Color(0xff000000);
 Color secondaryTextColor = Color(0xffBDBDBD);
 Color subtitleColor = Color(0xff504F5E);
@@ -52,4 +53,3 @@ FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
-

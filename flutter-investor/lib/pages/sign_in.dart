@@ -64,8 +64,38 @@ class _SignInPageState extends State<SignInPage> {
               height: 2,
             ),
             Text(
-              'Sign In to Continue',
+              'Investor',
               style: subtitleTextStyle,
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget logo() {
+      return Container(
+        margin: EdgeInsets.only(top: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Image.asset(
+                'logo.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Center(
+              child: Text(
+                'Prospera',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 24,
+                  fontWeight: semiBold,
+                ),
+              ),
             ),
           ],
         ),
@@ -74,7 +104,7 @@ class _SignInPageState extends State<SignInPage> {
 
     Widget emailInput() {
       return Container(
-        margin: EdgeInsets.only(top: 70),
+        margin: EdgeInsets.only(top: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -94,14 +124,14 @@ class _SignInPageState extends State<SignInPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_email.png',
+                      'icons/icon_email.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -148,14 +178,14 @@ class _SignInPageState extends State<SignInPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: Row(
                   children: [
                     Image.asset(
-                      'img_temp/icon_password.png',
+                      'icons/icon_password.png',
                       width: 17,
                     ),
                     SizedBox(
@@ -246,6 +276,7 @@ class _SignInPageState extends State<SignInPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               header(),
+              logo(),
               emailInput(),
               passwordInput(),
               isLoading ? LoadingButton() : signInButton(),

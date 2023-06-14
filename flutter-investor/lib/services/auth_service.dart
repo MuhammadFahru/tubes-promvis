@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_app/models/user_model.dart';
 
 class AuthService {
-  String baseUrl = 'http://localhost:90/api';
+  String baseUrl = 'http://localhost:8000/api';
 
   Future<UserModel> register({
     String? name,
