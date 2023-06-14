@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 
 class DataPribadi extends StatelessWidget {
-  final String name;
-  final String email;
-  final String profileImageUrl;
-  final String phoneNumber;
-  final String nik;
-
-  DataPribadi({
-    required this.name,
-    required this.email,
-    required this.profileImageUrl,
-    required this.phoneNumber,
-    required this.nik,
-  });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,15 +18,15 @@ class DataPribadi extends StatelessWidget {
                 Text(
                   'Halo,',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 30, // Ubah ukuran font menjadi 24
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(width: 8),
                 Text(
-                  name,
+                  'Ridwan',
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 30, // Ubah ukuran font menjadi 24
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -88,7 +74,8 @@ class DataPribadi extends StatelessWidget {
                         SizedBox(width: 16),
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: NetworkImage(profileImageUrl),
+                          // Your profile image or icon can be added here
+                         backgroundImage: AssetImage('assets/avatar.png'),
                         ),
                       ],
                     ),
@@ -103,14 +90,14 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Email',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                         ),
                       ),
                     ),
                     Text(
-                      email,
+                      'ridwan@gmail.com',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20, // Ubah ukuran font menjadi 20
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -125,10 +112,11 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Password',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                         ),
                       ),
                     ),
+                    // Add your onTap callback for password change here
                     GestureDetector(
                       onTap: () {
                         // Handle password change
@@ -136,7 +124,7 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Ganti Password',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
                         ),
@@ -160,7 +148,7 @@ class DataPribadi extends StatelessWidget {
                 Text(
                   'Informasi Pribadi',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 20, // Ubah ukuran font menjadi 20
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -173,14 +161,14 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Nama',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                         ),
                       ),
                     ),
                     Text(
-                      name,
+                      'ridwan',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20, // Ubah ukuran font menjadi 20
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -195,14 +183,14 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'No Telp',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                         ),
                       ),
                     ),
                     Text(
-                      phoneNumber,
+                      '0000000',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20, // Ubah ukuran font menjadi 20
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -217,14 +205,14 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'NIK',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20, // Ubah ukuran font menjadi 20
                         ),
                       ),
                     ),
                     Text(
-                      nik,
+                      '000000000000',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20, // Ubah ukuran font menjadi 20
                         fontWeight: FontWeight.bold,
                       ),
                     ),

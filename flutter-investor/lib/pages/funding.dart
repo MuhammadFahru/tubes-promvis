@@ -1,134 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/detail_funding_investor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-///
-///Modif sesuai api
-///
-class FundingItem {
-  final String name;
-  final String desc;
-  final String address;
-  final String imgPath;
-  final int plafond;
-  final double bagiHasil;
-  final int tenor;
-  final int terkumpul;
-  final DateTime deadline;
-
-  FundingItem({
-    required this.name,
-    required this.desc,
-    required this.address,
-    required this.imgPath,
-    required this.plafond,
-    required this.bagiHasil,
-    required this.tenor,
-    required this.terkumpul,
-    required this.deadline,
-  });
-
-  ///this.deadline.difference(DateTime.now())
-
-  FundingItem copyWith(
-      String? name,
-      String? desc,
-      String? imgPath,
-      String? address,
-      int? plafond,
-      double? bagiHasil,
-      int? tenor,
-      int? terkumpul,
-      DateTime? deadline) {
-    return FundingItem(
-        name: name ?? this.name,
-        desc: desc ?? this.desc,
-        address: address ?? this.address,
-        imgPath: imgPath ?? this.imgPath,
-        plafond: plafond ?? this.plafond,
-        bagiHasil: bagiHasil ?? this.bagiHasil,
-        tenor: tenor ?? this.tenor,
-        terkumpul: terkumpul ?? this.terkumpul,
-        deadline: deadline ?? this.deadline);
-  }
-}
-
-enum SortOption {
-  deadlineAsc,
-  deadlineDesc,
-  toTargetAsc,
-  toTargetDesc,
-}
-
-class FundingCubit extends Cubit<List<FundingItem>> {
-  FundingCubit() : super(_generateList());
-  SortOption selectedSortOption = SortOption.deadlineAsc;
-
-  ///
-  ///This is a pplaceholder generator
-  ///
-  static List<FundingItem> _generateList() {
-    var temp = List.generate(
-            10,
-            (index) => FundingItem(
-                name: 'funding $index',
-                desc: 'funding ke-$index',
-                address: 'alamat $index',
-                imgPath: '',
-                plafond: 200,
-                bagiHasil: 12.5,
-                tenor: 50,
-                terkumpul: 100,
-                deadline: DateTime(2025))) +
-        List.generate(
-            10,
-            (index) => FundingItem(
-                name: 'funding $index',
-                desc: 'funding ke-$index',
-                address: 'alamat $index',
-                imgPath: '',
-                plafond: 300,
-                bagiHasil: 12.5,
-                tenor: 50,
-                terkumpul: 100,
-                deadline: DateTime(2024)));
-    temp.sort((a, b) => a.deadline.compareTo(b.deadline));
-    return temp;
-  }
-
-  void search(String query) {
-    if (query.isEmpty) {
-      emit(_generateList());
-    } else {
-      final filteredList = _generateList().where((item) {
-        final name = item.name.toLowerCase();
-        return name.contains(query);
-      }).toList();
-      emit(filteredList);
-    }
-  }
-
-  void sortFundingItems(SortOption option) {
-    state.sort((a, b) {
-      switch (option) {
-        case SortOption.deadlineAsc:
-          return a.deadline.compareTo(b.deadline);
-        case SortOption.deadlineDesc:
-          return b.deadline.compareTo(a.deadline);
-        case SortOption.toTargetAsc:
-          return (a.plafond - a.terkumpul).compareTo((b.plafond - b.terkumpul));
-        case SortOption.toTargetDesc:
-          return (b.plafond - b.terkumpul).compareTo((a.plafond - a.terkumpul));
-        default:
-          return 0;
-      }
-    });
-
-    emit([...state]);
-  }
-}
+import 'package:flutter_app/cubit/funding_cubit.dart';
 
 class FundingScreen extends StatelessWidget {
   const FundingScreen({Key? key}) : super(key: key);
@@ -145,7 +22,7 @@ class FundingScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            'Funding Marketplace',
+            'Funding',
             style: GoogleFonts.inter(
                 color: primaryTextColor, fontWeight: bold, fontSize: 16),
           ),
@@ -172,10 +49,6 @@ class FundingScreen extends StatelessWidget {
       ),
     );
   }
-
-  ///
-  ///TODO make the searchbar works
-  ///
 
   Widget _buildSearchBar(BuildContext context) {
     return BlocBuilder<FundingCubit, List<FundingItem>>(
@@ -302,10 +175,12 @@ class FundingScreen extends StatelessWidget {
 
                 return GestureDetector(
                     onTap: () {
-                      ///
-                      ///Navigator.pushNamed(context, '', arguments:)
-                      ///
-                      ///
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailFundingPage(),
+                        ),
+                      );
                     },
                     child: Card(
                       margin: const EdgeInsets.symmetric(
@@ -323,12 +198,12 @@ class FundingScreen extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(50.0),
                                   child: Image.network(
-                                    'https://assets-news.housing.com/news/wp-content/uploads/2022/03/16162704/COMMERCIAL-KITCHEN-FEATURE-compressed.jpg',
+                                    'https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1.jpeg',
                                     height: 64.0,
                                     width: 64.0,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 15),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
@@ -347,9 +222,9 @@ class FundingScreen extends StatelessWidget {
                                       Text(
                                         item.desc,
                                         style: GoogleFonts.inter(
-                                          fontSize: 10.0,
+                                          fontSize: 12.0,
                                           color: secondaryTextColor,
-                                          fontWeight: light,
+                                          fontWeight: medium,
                                         ),
                                       ),
                                       Row(
@@ -357,16 +232,19 @@ class FundingScreen extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Icon(Icons.location_pin),
+                                          const Icon(
+                                            Icons.location_pin,
+                                            size: 15,
+                                          ),
                                           const SizedBox(
                                             width: 5,
                                           ),
                                           Text(
                                             item.address,
                                             style: GoogleFonts.inter(
-                                              fontSize: 8.0,
+                                              fontSize: 10.0,
                                               color: secondaryTextColor,
-                                              fontWeight: light,
+                                              fontWeight: regular,
                                             ),
                                           ),
                                         ],
@@ -404,26 +282,42 @@ class FundingScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: LinearPercentIndicator(
-                                    lineHeight: 20.0,
-                                    percent: (item.terkumpul / item.plafond)
-                                        .toDouble(),
-                                    center: Text(
-                                      item.plafond != item.terkumpul
-                                          ? "Rp${item.terkumpul},00 / Rp ${item.plafond},00"
-                                          : "Selesai",
-                                      style: GoogleFonts.inter(
-                                          color: Colors.white,
-                                          fontWeight: regular,
-                                          fontSize: 10),
-                                    ),
-                                    barRadius: const Radius.circular(16),
-                                    progressColor:
+                                    child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    LinearPercentIndicator(
+                                      lineHeight: 20.0,
+                                      percent: (item.terkumpul / item.plafond)
+                                          .toDouble(),
+                                      center: Text(
                                         item.plafond != item.terkumpul
-                                            ? primaryColor
-                                            : Colors.green,
-                                  ),
-                                ),
+                                            ? "${((item.terkumpul / item.plafond) * 100).toStringAsFixed(4 - ((item.terkumpul / item.plafond) * 100).toInt().toString().length)}%"
+                                            : "Selesai",
+                                        style: GoogleFonts.inter(
+                                            color: Colors.white,
+                                            fontWeight: regular,
+                                            fontSize: 10),
+                                      ),
+                                      barRadius: const Radius.circular(16),
+                                      progressColor:
+                                          item.plafond != item.terkumpul
+                                              ? primaryColor
+                                              : Colors.green,
+                                    ),
+                                    const SizedBox(
+                                      height: 3,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        "Rp${item.terkumpul},00 / Rp${item.plafond},00",
+                                        style: GoogleFonts.inter(
+                                            color: primaryTextColor,
+                                            fontWeight: semiBold,
+                                            fontSize: 10),
+                                      ),
+                                    )
+                                  ],
+                                )),
                                 const SizedBox(width: 5),
                                 Text(
                                   getTimeDif(),

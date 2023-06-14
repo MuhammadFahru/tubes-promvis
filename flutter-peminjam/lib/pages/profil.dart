@@ -15,6 +15,14 @@ class ProfileCubit extends Cubit<ProfileItem> {
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+  final String profileImageUrl =
+      "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc";
+  final String name = 'Nopal';
+  final String businessName = 'PT Persoro Harapan';
+  final String phoneNumber = '085156454359';
+  final String email = 'nopal@nopal.com';
+  final String nik = '000000000000';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProfileCubit>(
@@ -44,8 +52,7 @@ class ProfilePage extends StatelessWidget {
                     CircleAvatar(
                       radius: 45,
                       // Your profile image or icon can be added here
-                      backgroundImage: NetworkImage(
-                          "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc"),
+                      backgroundImage: NetworkImage(profileImageUrl),
                     ),
                     SizedBox(width: 10),
                     Expanded(
@@ -53,21 +60,21 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Nopal',
+                            name,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'Modal Ternak Lele',
+                            businessName,
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            '08123456789',
+                            phoneNumber,
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            'nopal@nopal.com',
+                            email,
                             textAlign: TextAlign.left,
                           ),
                         ],
@@ -75,8 +82,18 @@ class ProfilePage extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        // Logic to be executed when the edit icon is pressed
-                        // For example, display a dialog, navigate to an edit profile page, etc.
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DataPribadi(
+                              name: name,
+                              email: email,
+                              profileImageUrl: profileImageUrl,
+                              phoneNumber: phoneNumber,
+                              nik: nik,
+                            ),
+                          ),
+                        );
                       },
                       icon: Icon(Icons.edit),
                     ),
@@ -101,11 +118,16 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      // Navigates to Settings page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DataPribadi(),
+                          builder: (context) => DataPribadi(
+                            name: name,
+                            email: email,
+                            profileImageUrl: profileImageUrl,
+                            phoneNumber: phoneNumber,
+                            nik: nik,
+                          ),
                         ),
                       );
                     },
@@ -123,11 +145,18 @@ class ProfilePage extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      // Navigates to Settings page
+                      // Navigates to DataUsaha page
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DataUsaha(),
+                          builder: (context) => DataUsaha(
+                            businessName: businessName,
+                            profileImageUrl: profileImageUrl,
+                            email: email,
+                            name: name,
+                            phoneNumber: phoneNumber,
+                            nik: nik,
+                          ),
                         ),
                       );
                     },

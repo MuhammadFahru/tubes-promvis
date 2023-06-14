@@ -50,7 +50,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                       CircleAvatar(
                         radius: 16,
                         // Replace with the sender's profile image
-                        backgroundImage: AssetImage('assets/avatar.png'),
+                        backgroundImage: AssetImage('assets/images/avatar.png'),
                       ),
                     Container(
                       constraints: BoxConstraints(
@@ -87,7 +87,8 @@ class _ChatWidgetState extends State<ChatWidget> {
                       CircleAvatar(
                         radius: 16,
                         // Replace with the user's profile image
-                        backgroundImage: AssetImage('assets/avatar.png'),
+                        backgroundImage:
+                            AssetImage('assets/images/avatar2.jpeg'),
                       ),
                   ],
                 ),

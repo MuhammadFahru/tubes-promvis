@@ -64,7 +64,7 @@ class IndexPage extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.shopping_cart), // TODO: Custom market icon
-                    label: 'Marketplace',
+                    label: 'Funding',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.chat_rounded),

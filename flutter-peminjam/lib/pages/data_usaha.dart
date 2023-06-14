@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
 class DataUsaha extends StatelessWidget {
+  final String businessName;
+  final String profileImageUrl;
+  final String email;
+  final String name;
+  final String phoneNumber;
+  final String nik;
+
+  DataUsaha({
+    required this.businessName,
+    required this.profileImageUrl,
+    required this.email,
+    required this.name,
+    required this.phoneNumber,
+    required this.nik,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +32,7 @@ class DataUsaha extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'PT Persoro Harapan',
+                  businessName,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -60,16 +76,13 @@ class DataUsaha extends StatelessWidget {
                           'Change Profile Picture',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         SizedBox(width: 16),
                         CircleAvatar(
                           radius: 40,
-                          // Your profile image or icon can be added here
-                          backgroundImage: NetworkImage(
-                            "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc",
-                          ),
+                          backgroundImage: NetworkImage(profileImageUrl),
                         ),
                       ],
                     ),
@@ -92,7 +105,7 @@ class DataUsaha extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Nopal@nopal.com',
+                          email,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -127,7 +140,7 @@ class DataUsaha extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Nopal',
+                          name,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -162,7 +175,7 @@ class DataUsaha extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '0000000',
+                          phoneNumber,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -197,7 +210,7 @@ class DataUsaha extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '000000000000',
+                          nik,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
