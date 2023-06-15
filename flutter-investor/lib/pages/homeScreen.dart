@@ -7,17 +7,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:flutter_app/cubit/funding_cubit.dart';
 import 'package:flutter_app/cubit/portofolio_cubit.dart';
+import 'package:flutter_app/cubit/wallet_cubit.dart';
 import 'package:flutter_app/pages/detail_funding_investor.dart';
-
-/// Wallet Cubit
-/// crosscheck value later
-class WalletCubit extends Cubit<double> {
-  WalletCubit() : super(0.0);
-
-  void updateWalletValue(double value) {
-    emit(value);
-  }
-}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -553,7 +544,7 @@ class HomeScreen extends StatelessWidget {
 class WalletModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WalletCubit, double>(
+    return BlocBuilder<WalletCubit, int>(
       builder: (context, walletValue) {
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
