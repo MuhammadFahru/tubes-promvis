@@ -14,6 +14,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
+        centerTitle: true,
       ),
       body: Container(
         child: Column(

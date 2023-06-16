@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/data_pribadi.dart';
-import 'package:flutter_app/pages/detail_faq.dart';
-import 'package:flutter_app/pages/profile_setting.dart';
+import 'package:flutter_app/pages/support.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_app/pages/data_pribadi.dart';
+import 'package:flutter_app/pages/profile_setting.dart';
 
 ///
 ///Modif sesuai api
@@ -96,11 +96,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DataPribadi(),
-                                ),
-                              );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DataPribadi(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -115,13 +115,13 @@ class ProfileScreen extends StatelessWidget {
                       Icon(Icons.arrow_forward_ios),
                     ],
                   ),
-                 onTap: () {
+                  onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Settings(),
-                                ),
-                              );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Settings(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -137,7 +137,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    // Navigates to Settings page
+                    // Navigates to Security Code Page
                   },
                 ),
               ),
@@ -159,11 +159,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailFAQ(),
-                                ),
-                              );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SupportScreen(),// BUG : bot navbarnya ilang
+                      ),
+                    );
                   },
                 ),
               ),
