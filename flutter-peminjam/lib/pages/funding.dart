@@ -344,18 +344,6 @@ class FundingPage extends StatelessWidget {
                       ],
                     );
                   }).toList(),
-                  Divider(color: Color.fromARGB(255, 117, 117, 117)),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Riwayat Peminjaman",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             );

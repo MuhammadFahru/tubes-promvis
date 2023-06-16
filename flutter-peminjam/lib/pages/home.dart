@@ -179,11 +179,19 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text("Peminjaman Anda",
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text("Peminjaman Anda",
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor)),
+                      ),
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: Colors.grey[400],
+                      ),
                       Stack(
                         children: [
                           GestureDetector(

@@ -15,6 +15,7 @@ Color backgroundColor5 = Color(0xff2B2844);
 Color backgroundColor6 = Color(0xF1F1F1);
 Color primaryTextColor = Color(0xff000000);
 Color secondaryTextColor = Color(0xffBDBDBD);
+Color whiteTextColor = Color(0xffffffff);
 Color subtitleColor = Color(0xff504F5E);
 Color transparentColor = Colors.transparent;
 Color blackColor = Color(0xff2E2E2E);
