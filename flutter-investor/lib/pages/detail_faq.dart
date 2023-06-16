@@ -5,6 +5,7 @@ class DetailFAQ extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         backgroundColor: Theme.of(context).primaryColor,
         title: Text('Detail FAQ'),
       ),
       body: SingleChildScrollView(
