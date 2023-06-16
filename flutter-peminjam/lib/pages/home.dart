@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'detail_funding_peminjam.dart';
@@ -97,12 +98,12 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     Container(
                                         child: Text("Tagihan Selanjutnya",
-                                            style: TextStyle(
+                                            style: GoogleFonts.inter(
                                                 fontSize: 20.0,
                                                 color: Colors.white))),
                                     Container(
                                         child: Text("Rp1.000.000",
-                                            style: TextStyle(
+                                            style: GoogleFonts.inter(
                                                 fontSize: 30.0,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white))),
@@ -122,7 +123,7 @@ class HomePage extends StatelessWidget {
                                         const SizedBox(width: 8.0),
                                         Container(
                                           child: Text("3 Juni 2023",
-                                              style: TextStyle(
+                                              style: GoogleFonts.inter(
                                                   fontSize: 20.0,
                                                   color: Colors.white)),
                                         ),
@@ -145,7 +146,7 @@ class HomePage extends StatelessWidget {
                                         child: Padding(
                                             padding: EdgeInsets.all(10.0),
                                             child: Text("2 hari lagi",
-                                                style: TextStyle(
+                                                style: GoogleFonts.inter(
                                                     fontSize: 18.0,
                                                     fontWeight: FontWeight.bold,
                                                     color: alertColor)))),
@@ -182,7 +183,7 @@ class HomePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text("Peminjaman Anda",
-                            style: TextStyle(
+                            style: GoogleFonts.inter(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor)),
@@ -241,13 +242,13 @@ class HomePage extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text("Modal Dagang Warung",
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.inter(
                                                         fontSize: 18.0,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.black)),
                                                 Text("Penjanjian Pendanaan",
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.inter(
                                                         fontSize: 12.0,
                                                         color: Colors.grey)),
                                               ]),
@@ -263,7 +264,7 @@ class HomePage extends StatelessWidget {
                                                 padding:
                                                     const EdgeInsets.all(4.0),
                                                 child: Text("Ongoing",
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.inter(
                                                         fontSize: 10.0,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -284,12 +285,12 @@ class HomePage extends StatelessWidget {
                                               child: Column(
                                                 children: [
                                                   Text("TOTAL",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   Text("TAGIHAN",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -303,12 +304,12 @@ class HomePage extends StatelessWidget {
                                               child: Column(
                                                 children: [
                                                   Text("TOTAL",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   Text("DIBAYAR",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -322,12 +323,12 @@ class HomePage extends StatelessWidget {
                                               child: Column(
                                                 children: [
                                                   Text("TENOR",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                   Text("WAKTU",
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.inter(
                                                           fontSize: 10.0,
                                                           fontWeight:
                                                               FontWeight.bold)),
@@ -352,7 +353,7 @@ class HomePage extends StatelessWidget {
                                             animationDuration: 800,
                                             percent: 0.8,
                                             center: Text("4 Minggu",
-                                                style: TextStyle(
+                                                style: GoogleFonts.inter(
                                                     color: Colors.white)),
                                             linearStrokeCap:
                                                 LinearStrokeCap.roundAll,
@@ -360,7 +361,7 @@ class HomePage extends StatelessWidget {
                                           ),
                                         ),
                                         Text("80.0%",
-                                            style: TextStyle(
+                                            style: GoogleFonts.inter(
                                                 fontWeight: FontWeight.bold,
                                                 color: primaryColor)),
                                       ],
@@ -403,7 +404,7 @@ class WalletModule extends StatelessWidget {
                     children: [
                       // const Text(
                       //   'Saldo Wallet',
-                      //   style: TextStyle(fontSize: 14.0, color: Colors.white),
+                      //   style: GoogleFonts.inter(fontSize: 14.0, color: Colors.white),
                       // ),
                       const SizedBox(height: 4.0),
                       Text(
@@ -428,7 +429,7 @@ class WalletModule extends StatelessWidget {
                         child: IconButton(
                           iconSize: 12,
                           onPressed: () {
-                            Navigator.pushNamed(context, '/topUp');
+                            Navigator.pushNamed(context, '/top-up');
                           },
                           icon: Icon(Icons.add),
                           color: Colors.white,
@@ -453,7 +454,9 @@ class WalletModule extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.deepPurple),
                         child: IconButton(
                           iconSize: 12,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/withdraw');
+                          },
                           icon: Icon(Icons.arrow_downward_rounded),
                           color: Colors.white,
                         ),
@@ -477,7 +480,9 @@ class WalletModule extends StatelessWidget {
                             shape: BoxShape.circle, color: Colors.deepPurple),
                         child: IconButton(
                           iconSize: 12,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/history-wallet');
+                          },
                           icon: Icon(Icons.sticky_note_2),
                           color: Colors.white,
                         ),

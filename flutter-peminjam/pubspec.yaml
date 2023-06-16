@@ -36,6 +36,7 @@ dependencies:
   dropdown_search: ^0.6.1
   percent_indicator: ^4.0.1
   email_validator: "^2.1.16"
+  intl: ^0.18.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
