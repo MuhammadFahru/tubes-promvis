@@ -99,8 +99,12 @@ class _FormFundingState extends State<FormFunding> {
                     String bagiHasil = _bagiHasilController.text;
                     String tenor = _tenorController.text;
 
+                    double totalTagihan = int.parse(nominal) +
+                        (double.parse(bagiHasil) * int.parse(nominal) / 100);
+                    ;
+                    double cicilan = totalTagihan / int.parse(tenor);
                     String message =
-                        'Nominal: $nominal\nProfit Share: $bagiHasil\nTenor: $tenor';
+                        'Nominal: Rp$nominal\nProfit Share: $bagiHasil%\nTenor: $tenor Minggu\n====\nTotal Tagihan: $totalTagihan\nCicilan Mingguan: $cicilan';
 
                     _showSnackBar(context, message);
                   }

@@ -87,7 +87,7 @@ class WithdrawPage extends StatelessWidget {
             elevation: 0,
             toolbarHeight: 80,
             title: Text(
-              'Top Up',
+              'Withdraw',
               style: GoogleFonts.inter(
                   fontWeight: semiBold, fontSize: 30, color: Colors.black),
             ),
@@ -133,7 +133,7 @@ class WithdrawForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Limit Saldo',
+            'Saldo Anda',
             style: GoogleFonts.inter(
                 fontWeight: regular, fontSize: 16, color: primaryTextColor),
           ),
@@ -156,7 +156,7 @@ class WithdrawForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Nominal Penarikkan',
+            'Nominal Penarikan',
             style: GoogleFonts.inter(
                 fontSize: 14, fontWeight: regular, color: primaryTextColor),
           ),
@@ -369,7 +369,7 @@ class WithdrawForm extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
-            'Finalize',
+            'Withdraw',
             style: GoogleFonts.inter(
                 color: formIsValid() ? Colors.white : Colors.grey[500],
                 fontWeight: semiBold,

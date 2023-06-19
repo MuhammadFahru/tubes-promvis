@@ -21,7 +21,7 @@ Color transparentColor = Colors.transparent;
 Color blackColor = Color(0xff2E2E2E);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
-  color: primaryTextColor,
+  color: whiteTextColor,
 );
 
 TextStyle secondaryTextStyle = GoogleFonts.poppins(
