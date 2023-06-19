@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:flutter_app/cubit/wallet_cubit.dart';
+import 'top_up.dart';
 
 class TopUpCubit extends Cubit<TopUpState> {
   TopUpCubit() : super(TopUpState(banks: ['Bank A', 'Bank B', 'Bank C']));

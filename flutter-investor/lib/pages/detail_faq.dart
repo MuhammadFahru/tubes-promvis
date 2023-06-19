@@ -5,6 +5,7 @@ class DetailFAQ extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         backgroundColor: Theme.of(context).primaryColor,
         title: Text('Detail FAQ'),
       ),
       body: SingleChildScrollView(
@@ -23,7 +24,7 @@ class DetailFAQ extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Image.network(
-              "https://media.licdn.com/dms/image/C4E03AQFnPXx0yxT4Uw/profile-displayphoto-shrink_800_800/0/1631632219753?e=2147483647&v=beta&t=4aWGfU5RFdkYI0N1gtVXIyTSYeNEoGdeIh2PlVi50xc",
+              "https://awsimages.detik.net.id/community/media/visual/2023/02/23/warung-kelontong-madura-1",
               fit: BoxFit.cover,
               width: double.infinity,
               height: 200,

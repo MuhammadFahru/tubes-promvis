@@ -1,26 +1,39 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:flutter/services.dart';
 
 class FormFundingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Form Pengajuan Funding'),
-        ),
-        body: FormFunding());
+      appBar: AppBar(
+        title: Text('Form Pengajuan Funding'),
+      ),
+      body: FormFunding(),
+    );
   }
 }
 
-class FormFunding extends StatelessWidget {
+class FormFunding extends StatefulWidget {
+  @override
+  _FormFundingState createState() => _FormFundingState();
+}
+
+class _FormFundingState extends State<FormFunding> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _nominalController = TextEditingController();
   TextEditingController _bagiHasilController = TextEditingController();
   TextEditingController _tenorController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nominalController.dispose();
+    _bagiHasilController.dispose();
+    _tenorController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +49,9 @@ class FormFunding extends StatelessWidget {
               TextFormField(
                 controller: _nominalController,
                 keyboardType: TextInputType.number,
+                inputFormatters: [
+                  ThousandsSeparatorInputFormatter(),
+                ],
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter the nominal amount';
@@ -83,8 +99,12 @@ class FormFunding extends StatelessWidget {
                     String bagiHasil = _bagiHasilController.text;
                     String tenor = _tenorController.text;
 
+                    double totalTagihan = int.parse(nominal) +
+                        (double.parse(bagiHasil) * int.parse(nominal) / 100);
+                    ;
+                    double cicilan = totalTagihan / int.parse(tenor);
                     String message =
-                        'Nominal: $nominal\nProfit Share: $bagiHasil\nTenor: $tenor';
+                        'Nominal: Rp$nominal\nProfit Share: $bagiHasil%\nTenor: $tenor Minggu\n====\nTotal Tagihan: $totalTagihan\nCicilan Mingguan: $cicilan';
 
                     _showSnackBar(context, message);
                   }
@@ -101,5 +121,42 @@ class FormFunding extends StatelessWidget {
   void _showSnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
+
+class ThousandsSeparatorInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.selection.baseOffset == 0) {
+      return newValue;
+    }
+
+    final int thousandSeparatorLength = ','.length;
+    final int textLength = newValue.text.length;
+    int commaCounter = 0;
+    String newText = '';
+
+    for (int i = textLength - 1; i >= 0; i--) {
+      final String character = newValue.text[i];
+
+      if (character == ',') {
+        commaCounter++;
+        if (commaCounter % 4 == 0) {
+          newText = '$character$newText';
+        }
+      } else {
+        newText = '$character$newText';
+      }
+    }
+
+    return newValue.copyWith(
+      text: newText,
+      selection: TextSelection.collapsed(
+        offset: newText.length -
+            ((textLength - newValue.selection.baseOffset) ~/
+                thousandSeparatorLength),
+      ),
+    );
   }
 }

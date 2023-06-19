@@ -232,7 +232,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     onTap: () {
                       // Logic to be executed when the log out tile is pressed
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushNamed(context, '/sign-in');
                     },
                   ),
                 ),

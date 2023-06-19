@@ -62,6 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Sign Up',
               style: primaryTextStyle.copyWith(
+                color: whiteTextColor,
                 fontSize: 24,
                 fontWeight: semiBold,
               ),
@@ -87,6 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Full Name',
               style: primaryTextStyle.copyWith(
+                color: whiteTextColor,
                 fontSize: 16,
                 fontWeight: medium,
               ),

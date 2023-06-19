@@ -94,12 +94,11 @@ class FundingScreen extends StatelessWidget {
 
       return Container(
         decoration: BoxDecoration(
-            color: Color(int.parse('0xff613EEA')),
-            borderRadius: BorderRadius.circular(16.0)),
+            color: primaryColor, borderRadius: BorderRadius.circular(16.0)),
         child: DropdownButton<SortOption>(
           underline: const SizedBox(),
-          style: const TextStyle(color: Colors.white),
-          dropdownColor: Color(int.parse('0xff613EEA')),
+          style: GoogleFonts.inter(color: Colors.white),
+          dropdownColor: Colors.grey,
           borderRadius: BorderRadius.circular(16.0),
           value: context.read<FundingCubit>().selectedSortOption,
           onChanged: (SortOption? newValue) {

@@ -7,17 +7,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:flutter_app/cubit/funding_cubit.dart';
 import 'package:flutter_app/cubit/portofolio_cubit.dart';
+import 'package:flutter_app/cubit/wallet_cubit.dart';
 import 'package:flutter_app/pages/detail_funding_investor.dart';
-
-/// Wallet Cubit
-/// crosscheck value later
-class WalletCubit extends Cubit<double> {
-  WalletCubit() : super(0.0);
-
-  void updateWalletValue(double value) {
-    emit(value);
-  }
-}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -77,73 +68,75 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 32.0,
-            ),
-            WalletModule(),
-            SizedBox(height: 32.0),
-            // portofolio section
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Portofolio',
-                      style: GoogleFonts.inter(
-                          fontWeight: FontWeight.bold,
-                          color: primaryColor,
-                          fontSize: 12),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          context.read<ScreenCubit>().updateScreen(1);
-                        },
-                        child: Text(
-                          'more',
-                          style: GoogleFonts.inter(
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor,
-                              fontSize: 12),
-                        ))
-                  ],
-                )),
-            _buildCardListViewPorto(context),
-            SizedBox(
-              height: 32.0,
-            ),
-            //funding recommended
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Funding Rekomendasi',
-                      style: GoogleFonts.inter(
-                          fontWeight: FontWeight.bold,
-                          color: primaryColor,
-                          fontSize: 12),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          context.read<ScreenCubit>().updateScreen(2);
-                        },
-                        child: Text(
-                          'more',
-                          style: GoogleFonts.inter(
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor,
-                              fontSize: 12),
-                        ))
-                  ],
-                )),
-            _buildCardListViewFunding(context),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 32.0,
+              ),
+              WalletModule(),
+              SizedBox(height: 32.0),
+              // portofolio section
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Portofolio',
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                            fontSize: 12),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            context.read<ScreenCubit>().updateScreen(1);
+                          },
+                          child: Text(
+                            'more',
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                                fontSize: 12),
+                          ))
+                    ],
+                  )),
+              _buildCardListViewPorto(context),
+              SizedBox(
+                height: 32.0,
+              ),
+              //funding recommended
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Funding Rekomendasi',
+                        style: GoogleFonts.inter(
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                            fontSize: 12),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            context.read<ScreenCubit>().updateScreen(2);
+                          },
+                          child: Text(
+                            'more',
+                            style: GoogleFonts.inter(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                                fontSize: 12),
+                          ))
+                    ],
+                  )),
+              _buildCardListViewFunding(context),
+            ],
+          ),
         ),
       ),
     );
@@ -551,7 +544,7 @@ class HomeScreen extends StatelessWidget {
 class WalletModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WalletCubit, double>(
+    return BlocBuilder<WalletCubit, int>(
       builder: (context, walletValue) {
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
@@ -621,7 +614,9 @@ class WalletModule extends StatelessWidget {
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/withdraw');
+                          },
                           icon: Icon(Icons.arrow_downward_rounded),
                           color: primaryColor,
                         ),

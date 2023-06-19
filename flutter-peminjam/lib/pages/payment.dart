@@ -16,6 +16,12 @@ class PaymentFundingPage extends StatelessWidget {
 }
 
 class PaymentFunding extends StatelessWidget {
+  final int cicilan = 1000000;
+  final int saldo = 5000000;
+  final ValueNotifier<bool> _isOnTapNotifier = ValueNotifier(false);
+  final ValueNotifier<int> _groupValueNotifier = ValueNotifier(0);
+  final ValueNotifier<String?> _selectedBankNotifier = ValueNotifier(null);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,21 +52,124 @@ class PaymentFunding extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                child: Text("Biaya Angsuran",
-                                    style: TextStyle(
-                                        fontSize: 16.0, color: Colors.white))),
+                              child: Text(
+                                "Biaya Angsuran",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                             Container(
-                                child: Text("Rp1.000.000",
-                                    style: TextStyle(
-                                        fontSize: 30.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white))),
+                              child: Text(
+                                "Rp${cicilan.toString()}",
+                                style: TextStyle(
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16, top: 10),
+                child: Text(
+                  "Metode Pembayaran",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(height: 50),
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: Icon(
+                        Icons.attach_money,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      Text(
+                        "Saldo Wallet",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        "Rp" + saldo.toString(),
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Color.fromARGB(255, 80, 80, 80),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        _isOnTapNotifier.value = !_isOnTapNotifier.value;
+                        _groupValueNotifier.value =
+                            _isOnTapNotifier.value ? 1 : 0;
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: ValueListenableBuilder<int>(
+                          valueListenable: _groupValueNotifier,
+                          builder: (context, value, child) {
+                            return Transform.scale(
+                              scale: 1.3,
+                              child: Radio(
+                                value: 1,
+                                groupValue: value,
+                                activeColor: Theme.of(context).primaryColor,
+                                onChanged: (newValue) {
+                                  _isOnTapNotifier.value = newValue == 1;
+                                  _groupValueNotifier.value = newValue!;
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 20),
+                child: Text(
+                  "Atau",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
+                ),
               ),
               Container(
                 width: double.infinity,
@@ -80,17 +189,24 @@ class PaymentFunding extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 50,
-            child: ElevatedButton(
-              onPressed: () {
-                // Respond to button press
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentDetailPage(),
-                  ),
+            child: ValueListenableBuilder<int>(
+              valueListenable: _groupValueNotifier,
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  onPressed: value != 0
+                      ? () {
+                          // Respond to button press
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentDetailPage(),
+                            ),
+                          );
+                        }
+                      : null,
+                  child: Text('LANJUTKAN'),
                 );
               },
-              child: Text('LANJUTKAN'),
             ),
           )
         ],

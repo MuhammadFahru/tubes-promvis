@@ -12,7 +12,9 @@ import 'package:flutter_app/pages/login.dart';
 import 'package:flutter_app/pages/forgot_password.dart';
 import 'package:flutter_app/pages/index.dart';
 import 'package:flutter_app/pages/password_sent.dart';
-import 'package:flutter_app/pages/topUp.dart';
+import 'package:flutter_app/pages/top_up.dart';
+import 'package:flutter_app/pages/withdraw.dart';
+import 'package:flutter_app/pages/history_wallet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +46,9 @@ class MyApp extends StatelessWidget {
             '/signUp': (context) => Signup(),
             '/passwordSent': (context) => PasswordSentPage(),
             '/index': (context) => IndexPage(),
-            '/topUp': (context) => TopUpPage(),
+            '/top-up': (context) => TopUpPage(),
+            '/withdraw': (context) => WithdrawPage(),
+            '/history-wallet': (context) => HistoryPage(),
           },
         ));
   }

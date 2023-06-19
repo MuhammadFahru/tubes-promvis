@@ -56,15 +56,15 @@ class IndexPage extends StatelessWidget {
                     label: 'Home',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.shopping_cart), // TODO: Custom market icon
-                    label: 'Marketplace',
+                    icon: Icon(Icons.request_page), // TODO: Custom market icon
+                    label: 'Funding',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.chat_rounded),
                     label: 'Support',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline_rounded),
+                    icon: Icon(Icons.person),
                     label: 'Profile',
                   ),
                 ],

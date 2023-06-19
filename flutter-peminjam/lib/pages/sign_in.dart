@@ -56,6 +56,7 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               'Login',
               style: primaryTextStyle.copyWith(
+                color: whiteTextColor,
                 fontSize: 24,
                 fontWeight: semiBold,
               ),
@@ -81,6 +82,7 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               'Email Address',
               style: primaryTextStyle.copyWith(
+                color: whiteTextColor,
                 fontSize: 16,
                 fontWeight: medium,
               ),
@@ -135,6 +137,7 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               'Password',
               style: primaryTextStyle.copyWith(
+                color: whiteTextColor,
                 fontSize: 16,
                 fontWeight: medium,
               ),
@@ -197,6 +200,7 @@ class _SignInPageState extends State<SignInPage> {
           child: Text(
             'Sign In',
             style: primaryTextStyle.copyWith(
+              color: whiteTextColor,
               fontSize: 16,
               fontWeight: medium,
             ),

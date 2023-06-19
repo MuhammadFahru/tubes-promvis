@@ -5,62 +5,65 @@ class DataPribadi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         backgroundColor: Theme.of(context).primaryColor,
         title: Text('Detail'),
+        centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Halo,',
-                  style: TextStyle(
-                    fontSize: 30, // Ubah ukuran font menjadi 24
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      'Halo,',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      'Ridwan',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 8),
+                SizedBox(height: 16),
                 Text(
-                  'Ridwan',
+                  'Informasi Akun',
                   style: TextStyle(
-                    fontSize: 30, // Ubah ukuran font menjadi 24
-                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 16),
           Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Informasi Akun',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
-                SizedBox(height: 16),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black,
+                      color: Color(0xFFBDBDBD),
                       width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -68,14 +71,15 @@ class DataPribadi extends StatelessWidget {
                           'Change Profile Picture',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.normal,
+                            color: Color(0xFFBDBDBD),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(width: 16),
                         CircleAvatar(
                           radius: 40,
                           // Your profile image or icon can be added here
-                         backgroundImage: AssetImage('assets/avatar.png'),
+                          backgroundImage: AssetImage('assets/avatar.png'),
                         ),
                       ],
                     ),
@@ -90,20 +94,27 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Email',
                         style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
+                          color: Color(0xFFBDBDBD),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     Text(
                       'ridwan@gmail.com',
                       style: TextStyle(
-                        fontSize: 20, // Ubah ukuran font menjadi 20
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 12),
+                Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: Color(0xFFE8E8E8),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -112,7 +123,9 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Password',
                         style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
+                          color: Color(0xFFBDBDBD),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -124,13 +137,19 @@ class DataPribadi extends StatelessWidget {
                       child: Text(
                         'Ganti Password',
                         style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
-                          color: Colors.blue,
+                          fontSize: 13,
+                          color: Color(0xFF613EEA),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: 12),
+                Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: Color(0xFFE8E8E8),
                 ),
               ],
             ),
@@ -138,83 +157,116 @@ class DataPribadi extends StatelessWidget {
           SizedBox(height: 16),
           Container(
             padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(8),
-            ),
+            decoration: BoxDecoration(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Informasi Pribadi',
                   style: TextStyle(
-                    fontSize: 20, // Ubah ukuran font menjadi 20
-                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                SizedBox(height: 8),
+                Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Nama',
-                        style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            'Nama Lengkap',
+                            style: TextStyle(
+                              color: Color(0xFFBDBDBD),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                        Text(
+                          'Ridwan Albana',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'ridwan',
-                      style: TextStyle(
-                        fontSize: 20, // Ubah ukuran font menjadi 20
-                        fontWeight: FontWeight.bold,
-                      ),
+                    SizedBox(height: 8),
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Color(0xFFE8E8E8),
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Text(
-                        'No Telp',
-                        style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            'No Handphone',
+                            style: TextStyle(
+                              color: Color(0xFFBDBDBD),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
+                        Text(
+                          '+6281221110987',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '0000000',
-                      style: TextStyle(
-                        fontSize: 20, // Ubah ukuran font menjadi 20
-                        fontWeight: FontWeight.bold,
-                      ),
+                    SizedBox(height: 8),
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Color(0xFFE8E8E8),
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: Text(
-                        'NIK',
-                        style: TextStyle(
-                          fontSize: 20, // Ubah ukuran font menjadi 20
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            'NIK',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFBDBDBD),
+                            ),
+                          ),
                         ),
-                      ),
+                        Text(
+                          '3214567890321',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '000000000000',
-                      style: TextStyle(
-                        fontSize: 20, // Ubah ukuran font menjadi 20
-                        fontWeight: FontWeight.bold,
-                      ),
+                    SizedBox(height: 8),
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: Color(0xFFE8E8E8),
                     ),
                   ],
                 ),
