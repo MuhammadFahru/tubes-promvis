@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'detail_payment.dart';
 
 class DetailFundingPage extends StatelessWidget {
   @override
@@ -51,7 +52,7 @@ void _showBottomSheet(BuildContext context) {
                   ),
                 ),
                 Text(
-                  'Rp 2.000.000',
+                  'Rp 200.000',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -70,7 +71,7 @@ void _showBottomSheet(BuildContext context) {
                   ),
                 ),
                 Text(
-                  'Rp 2.000.000',
+                  'Rp 5.000.000',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -81,8 +82,12 @@ void _showBottomSheet(BuildContext context) {
             SizedBox(height: 16),
             GestureDetector(
               onTap: () {
-                // Aksi ketika tombol "Lanjutkan Pembayaran" ditekan
-                Navigator.pop(context); // Menutup bottom sheet
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => detail_payment(),
+                  ),
+                );
                 // Lakukan aksi lainnya sesuai kebutuhan
               },
               child: Container(
@@ -94,7 +99,7 @@ void _showBottomSheet(BuildContext context) {
                 ),
                 child: Center(
                   child: Text(
-                    'Lanjutkan Pembayaran - Rp 2.000.000',
+                    'Lanjutkan Pembayaran - Rp 200.000',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -474,7 +479,7 @@ class DetailFunding extends StatelessWidget {
                                 context); // Call the _showBottomSheet function
                           },
                           child: Container(
-                            height: 30,
+                            height: 40,
                             width: 320,
                             margin: EdgeInsets.only(top: 10),
                             decoration: BoxDecoration(
