@@ -3,6 +3,9 @@ import 'package:flutter_app/pages/support.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_app/pages/data_pribadi.dart';
 import 'package:flutter_app/pages/profile_setting.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
 
 ///
 ///Modif sesuai api
@@ -18,6 +21,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -51,17 +57,17 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         SizedBox(height: 10),
                         Text(
-                          'Ridwan',
+                          user.nama!,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 5),
                         Text(
-                          '08122221123',
+                          user.noHandphone!,
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          'ridwan@gmail.com',
+                          user.email!,
                           textAlign: TextAlign.left,
                         ),
                       ],
@@ -161,7 +167,8 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SupportScreen(),// BUG : bot navbarnya ilang
+                        builder: (context) =>
+                            SupportScreen(), // BUG : bot navbarnya ilang
                       ),
                     );
                   },

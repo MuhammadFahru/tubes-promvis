@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
+
 class DataPribadi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return Scaffold(
       appBar: AppBar(
-         backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Detail'),
         centerTitle: true,
       ),
@@ -28,7 +35,7 @@ class DataPribadi extends StatelessWidget {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'Ridwan',
+                      user.nama!,
                       style: TextStyle(
                         fontSize: 24,
                       ),
@@ -101,7 +108,7 @@ class DataPribadi extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'ridwan@gmail.com',
+                      user.email!,
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -186,7 +193,7 @@ class DataPribadi extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Ridwan Albana',
+                          user.nama!,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -220,7 +227,7 @@ class DataPribadi extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '+6281221110987',
+                          user.noHandphone!,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
@@ -254,7 +261,7 @@ class DataPribadi extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '3214567890321',
+                          user.nik!,
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.bold,

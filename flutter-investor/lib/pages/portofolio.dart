@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 import 'package:flutter_app/cubit/portofolio_cubit.dart';
+import 'package:flutter_app/pages/detail_funding_investor.dart';
 
 class PortofolioScreen extends StatelessWidget {
   const PortofolioScreen({Key? key}) : super(key: key);
@@ -104,9 +105,12 @@ class PortofolioScreen extends StatelessWidget {
 
                 return GestureDetector(
                     onTap: () {
-                      ///
-                      /// detail of porto
-                      ///
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailFundingPage(),
+                        ),
+                      );
                     },
                     child: Card(
                       margin: const EdgeInsets.symmetric(

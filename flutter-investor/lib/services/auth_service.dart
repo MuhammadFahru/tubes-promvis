@@ -6,18 +6,28 @@ class AuthService {
   String baseUrl = 'http://localhost:8000/api';
 
   Future<UserModel> register({
-    String? name,
     String? username,
     String? email,
     String? password,
+    String? pin,
+    String? nik,
+    String? nama,
+    String? noHandphone,
+    int? bankId,
+    String? bankNoRekening,
   }) async {
-    var url = Uri.parse('$baseUrl/register');
+    var url = Uri.parse('$baseUrl/register-investor');
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({
-      'name': name,
       'username': username,
       'email': email,
       'password': password,
+      'pin': pin,
+      'nik': nik,
+      'nama': nama,
+      'no_handphone': noHandphone,
+      'bank_id': bankId,
+      'no_rekening': bankNoRekening,
     });
 
     var response = await http.post(
@@ -32,7 +42,7 @@ class AuthService {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
       user.token = 'Bearer ' + data['access_token'];
-
+      user.walletBalance = double.parse(data['wallet']['balance']);
       return user;
     } else {
       throw Exception('Gagal Register');
@@ -62,7 +72,7 @@ class AuthService {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
       user.token = 'Bearer ' + data['access_token'];
-
+      user.walletBalance = double.parse(data['wallet']['balance']);
       return user;
     } else {
       throw Exception('Gagal Login');

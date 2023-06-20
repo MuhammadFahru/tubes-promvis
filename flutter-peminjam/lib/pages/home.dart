@@ -7,6 +7,9 @@ import 'payment.dart';
 import 'payment_detail.dart';
 import 'notification.dart';
 import 'package:flutter_app/theme.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
 
 /// Wallet Cubit
 /// crosscheck value later
@@ -119,6 +122,9 @@ class HomePage extends StatelessWidget {
 class WalletModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return BlocBuilder<WalletCubit, double>(
       builder: (context, walletValue) {
         return Container(
@@ -146,7 +152,7 @@ class WalletModule extends StatelessWidget {
                       //   style: GoogleFonts.inter(fontSize: 14.0, color: Colors.white),
                       // ),
                       const SizedBox(height: 4.0),
-                      Text('Rp$walletValue,00',
+                      Text(user.walletBalance!.toString(),
                           style: GoogleFonts.inter(
                               fontSize: 16.0, color: primaryColor)),
                     ]),

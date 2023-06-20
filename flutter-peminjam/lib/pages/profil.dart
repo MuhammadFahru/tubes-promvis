@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/data_usaha.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
 
 import 'data_pribadi.dart';
 import 'profile_setting.dart';
@@ -25,6 +28,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit(),
       child: Scaffold(
@@ -60,21 +66,21 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            name,
+                            user.nama!,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            businessName,
+                            user.companyName!,
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            phoneNumber,
+                            user.noHandphone!,
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            email,
+                            user.email!,
                             textAlign: TextAlign.left,
                           ),
                         ],

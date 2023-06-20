@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/theme.dart';
+
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/providers/investasi_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
 
 class payment extends StatefulWidget {
   @override
@@ -8,8 +14,34 @@ class payment extends StatefulWidget {
 class _paymentState extends State<payment> {
   bool _isOnTap = false;
   int _groupValue = 0;
+  final int saldoInvestasi = 5000000;
+  final double? totalBayar = 200000;
+
   @override
   Widget build(BuildContext context) {
+    InvestasiProvider investasiProvider =
+        Provider.of<InvestasiProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
+    handleInvestasi() async {
+      print("Debug");
+      print(user.id!);
+      if (await investasiProvider.bayar(user.id, 5, totalBayar)) {
+        Navigator.pushNamed(context, '/index');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Gagal Investasi!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -55,7 +87,7 @@ class _paymentState extends State<payment> {
                     ),
                     SizedBox(height: 6),
                     Text(
-                      "Rp5.000.000",
+                      user.walletBalance!.toString(),
                       style: TextStyle(
                         fontSize: 16.0,
                         color: Color.fromARGB(255, 80, 80, 80),
@@ -76,10 +108,9 @@ class _paymentState extends State<payment> {
                       child: Transform.scale(
                         scale: 1.3,
                         child: Radio(
-                          value:
-                              1, 
-                          groupValue: _groupValue, 
-                         activeColor: Theme.of(context).primaryColor,
+                          value: 1,
+                          groupValue: _groupValue,
+                          activeColor: Theme.of(context).primaryColor,
                           onChanged: (value) {
                             setState(() {
                               _isOnTap = value == 1;
@@ -113,7 +144,7 @@ class _paymentState extends State<payment> {
                         ),
                       ),
                       Text(
-                        'Rp 200.000',
+                        "Rp ${totalBayar.toString()}",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 22,
@@ -131,6 +162,7 @@ class _paymentState extends State<payment> {
           BottomNavigationBarItem(
             icon: GestureDetector(
               onTap: () {
+                handleInvestasi();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

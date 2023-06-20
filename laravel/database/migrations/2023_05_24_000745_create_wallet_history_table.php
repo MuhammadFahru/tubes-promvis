@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('wallet_id')->nullable();
             $table->string('transaction_type');
-            $table->double('amount', 8, 2)->default(0);
-            $table->double('previous_balance', 8, 2)->default(0);
-            $table->double('current_balance', 8, 2)->default(0);
+            $table->decimal('amount', 10, 2)->default(0);
+            $table->decimal('previous_balance', 10, 2)->default(0);
+            $table->decimal('current_balance', 10, 2)->default(0);
             $table->timestamps();
         });
     }

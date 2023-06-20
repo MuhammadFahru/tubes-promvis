@@ -1,36 +1,72 @@
 class UserModel {
   int? id;
-  String? name;
+  String? nik;
+  String? nama;
   String? email;
-  String? username;
-  String? profilePhotoUrl;
+  String? noHandphone;
+  String? bankNama;
+  String? bankNoRekening;
+  String? kategori;
+  String? sektor;
+  String? companyName;
+  String? companyEmail;
+  String? companyAddress;
+  double? walletBalance;
+  String? fotoUrl;
   String? token;
 
   UserModel({
     this.id = 0,
-    this.name = '',
+    this.nik = '',
+    this.nama = '',
     this.email = '',
-    this.username = '',
-    this.profilePhotoUrl = '',
+    this.noHandphone = '',
+    this.bankNama = '',
+    this.bankNoRekening = '',
+    this.kategori = '',
+    this.sektor = '',
+    this.companyName = '',
+    this.companyEmail = '',
+    this.companyAddress = '',
+    this.walletBalance = 0,
+    this.fotoUrl = '',
     this.token = '',
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    nik = json['nik'];
+    nama = json['nama'];
     email = json['email'];
-    username = json['username'];
-    profilePhotoUrl = json['profile_photo_url'];
+    noHandphone = json['email'];
+    bankNama = json['email'];
+    bankNoRekening = json['email'];
+    kategori = json['email'];
+    sektor = json['email'];
+    companyName = json['email'];
+    companyEmail = json['email'];
+    companyAddress = json['email'];
+    walletBalance = 0;
+    fotoUrl = json['foto'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'nik': nik,
+      'nama': nama,
       'email': email,
-      'username': username,
-      'profile_photo_url': profilePhotoUrl,
+      'noHandphone': email,
+      'bankNama': email,
+      'bankNoRekening': email,
+      'kategori': email,
+      'sektor': email,
+      'companyName': email,
+      'companyEmail': email,
+      'companyAddress': email,
+      'walletBalance': 0,
+      'foto': fotoUrl,
       'token': token,
     };
   }

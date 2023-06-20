@@ -70,4 +70,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(Wallet::class, 'users_id', 'id');
     }
+
+    public function pinjaman()
+    {
+        return $this->hasMany(Pinjaman::class, 'users_id', 'id');
+    }
+
+    public function investasi()
+    {
+        return $this->hasMany(Investasi::class, 'users_id', 'id');
+    }
+
+    public function angsuran()
+    {
+        return $this->hasMany(Angsuran::class, 'users_id', 'id');
+    }
 }

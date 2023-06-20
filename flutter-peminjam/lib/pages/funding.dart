@@ -39,7 +39,7 @@ class FundingCubit extends Cubit<List<FundingItem>> {
   }
 }
 
-class FundingPage extends StatelessWidget {
+/*class FundingPage extends StatelessWidget {
   const FundingPage({Key? key}) : super(key: key);
 
   @override
@@ -138,6 +138,126 @@ class FundingPage extends StatelessWidget {
                       progressPercentage: item.progressPercentage,
                     );
                   }).toList(),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}*/
+
+class FundingPage extends StatelessWidget {
+  final bool showData;
+
+  const FundingPage({Key? key, required this.showData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<FundingCubit>(
+      create: (context) => FundingCubit(),
+      child: Scaffold(
+        backgroundColor: Color(int.parse('0xffDBDBDB')),
+        appBar: AppBar(
+          toolbarHeight: 60,
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: const Text(
+            'Funding',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
+        body: BlocBuilder<FundingCubit, List<FundingItem>>(
+          builder: (context, fundingItems) {
+            return Container(
+              width: double.infinity,
+              color: backgroundColor6,
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 30),
+                        padding: const EdgeInsets.only(
+                            top: 16, bottom: 16, left: 16, right: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: primaryColor,
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                "Ajukan Peminjaman",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FormFundingPage(),
+                                      ),
+                                    );
+                                  },
+                                  iconSize: 36,
+                                  icon: Icon(Icons.add),
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(color: Color.fromARGB(255, 117, 117, 117)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Sedang Berlangsung",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  if (showData)
+                    ...fundingItems.map((item) {
+                      return FundingItem(
+                        imageUrl: item.imageUrl,
+                        title: item.title,
+                        fundingAgreement: item.fundingAgreement,
+                        status: item.status,
+                        totalBilling: item.totalBilling,
+                        totalPaid: item.totalPaid,
+                        tenor: item.tenor,
+                        currentWeek: item.currentWeek,
+                        progressPercentage: item.progressPercentage,
+                      );
+                    }).toList(),
+                  if (!showData)
+                    Text(
+                      "Data Kosong",
+                      style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black12),
+                    )
                 ],
               ),
             );

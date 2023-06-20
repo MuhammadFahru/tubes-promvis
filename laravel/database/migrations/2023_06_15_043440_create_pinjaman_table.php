@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('pinjaman', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('users_id')->nullable();
             $table->string('nama');
             $table->string('deskripsi');
             $table->string('alamat');
-            $table->double('plafond', 8, 2)->default(0);
-            $table->double('terkumpul', 8, 2)->default(0);
-            $table->float('bagi_hasil', 8, 2)->default(0);
+            $table->decimal('plafond', 10, 2)->default(0);
+            $table->decimal('terkumpul', 10, 2)->default(0);
+            $table->float('bagi_hasil', 10, 2)->default(0);
             $table->integer('tenor')->default(0);
             $table->date('deadline');
             $table->string('status');

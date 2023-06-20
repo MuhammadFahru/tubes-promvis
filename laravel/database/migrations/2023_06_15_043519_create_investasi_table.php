@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('investasi', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('users_id')->nullable();
             $table->bigInteger('pinjaman_id')->nullable();
-            $table->bigInteger('user_id')->nullable();
-            $table->double('jumlah', 8, 2)->default(0);
+            $table->decimal('jumlah', 10, 2)->default(0);
             $table->timestamps();
         });
     }

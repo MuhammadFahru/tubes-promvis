@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Models\WalletInvestor;
 use Exception;
 use Illuminate\Http\Request;
@@ -59,6 +60,11 @@ class RegisterController extends Controller
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
+            $wallet = new Wallet();
+            $wallet->users_id = $user->id;
+            $wallet->balance = 0;
+            $wallet->save();
+
             $user = User::select(
                 'email',
                 'roles',
@@ -78,7 +84,8 @@ class RegisterController extends Controller
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => $user,
+                'wallet' => $wallet,
             ],'User Peminjam Registered');
         } catch (Exception $error) {
             return ResponseFormatter::error([
@@ -114,10 +121,10 @@ class RegisterController extends Controller
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
-            $wallet_investor = new WalletInvestor();
-            $wallet_investor->users_id = $user->id;
-            $wallet_investor->balance = 0;
-            $wallet_investor->save();
+            $wallet = new Wallet();
+            $wallet->users_id = $user->id;
+            $wallet->balance = 0;
+            $wallet->save();
 
             $user = User::select(
                 'email',
@@ -134,7 +141,7 @@ class RegisterController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user,
-                'wallet_investor' => $wallet_investor,
+                'wallet' => $wallet,
             ],'User Investor Registered');
         } catch (Exception $error) {
             return ResponseFormatter::error([

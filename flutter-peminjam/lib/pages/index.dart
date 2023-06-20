@@ -22,7 +22,7 @@ class IndexPage extends StatelessWidget {
 
   final List<Widget> screens = [
     const HomePage(),
-    const FundingPage(),
+    const FundingPage(showData: true),
     const SupportPage(),
     const ProfilePage(),
   ];

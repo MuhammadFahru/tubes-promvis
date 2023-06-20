@@ -56,7 +56,6 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               'Login',
               style: primaryTextStyle.copyWith(
-                color: whiteTextColor,
                 fontSize: 24,
                 fontWeight: semiBold,
               ),
@@ -65,8 +64,38 @@ class _SignInPageState extends State<SignInPage> {
               height: 2,
             ),
             Text(
-              'Sign In to Continue',
+              'Peminjam',
               style: subtitleTextStyle,
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget logo() {
+      return Container(
+        margin: EdgeInsets.only(top: 50),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Image.asset(
+                'logo.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
+            SizedBox(
+              height: 2,
+            ),
+            Center(
+              child: Text(
+                'Prospera',
+                style: primaryTextStyle.copyWith(
+                  fontSize: 24,
+                  fontWeight: semiBold,
+                ),
+              ),
             ),
           ],
         ),
@@ -75,14 +104,13 @@ class _SignInPageState extends State<SignInPage> {
 
     Widget emailInput() {
       return Container(
-        margin: EdgeInsets.only(top: 70),
+        margin: EdgeInsets.only(top: 50),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Email Address',
               style: primaryTextStyle.copyWith(
-                color: whiteTextColor,
                 fontSize: 16,
                 fontWeight: medium,
               ),
@@ -96,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
@@ -137,7 +165,6 @@ class _SignInPageState extends State<SignInPage> {
             Text(
               'Password',
               style: primaryTextStyle.copyWith(
-                color: whiteTextColor,
                 fontSize: 16,
                 fontWeight: medium,
               ),
@@ -151,7 +178,7 @@ class _SignInPageState extends State<SignInPage> {
                 horizontal: 16,
               ),
               decoration: BoxDecoration(
-                color: backgroundColor2,
+                color: backgroundColor7,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
@@ -200,7 +227,6 @@ class _SignInPageState extends State<SignInPage> {
           child: Text(
             'Sign In',
             style: primaryTextStyle.copyWith(
-              color: whiteTextColor,
               fontSize: 16,
               fontWeight: medium,
             ),
@@ -239,7 +265,7 @@ class _SignInPageState extends State<SignInPage> {
     }
 
     return Scaffold(
-      backgroundColor: backgroundColor1,
+      backgroundColor: backgroundColor6,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
@@ -250,6 +276,7 @@ class _SignInPageState extends State<SignInPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               header(),
+              logo(),
               emailInput(),
               passwordInput(),
               isLoading ? LoadingButton() : signInButton(),

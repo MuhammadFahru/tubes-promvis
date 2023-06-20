@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
+
 class DataPribadi extends StatelessWidget {
   final String name;
   final String email;
@@ -17,6 +21,9 @@ class DataPribadi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail'),
@@ -38,7 +45,7 @@ class DataPribadi extends StatelessWidget {
                 ),
                 SizedBox(width: 8),
                 Text(
-                  name,
+                  user.nama!,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.normal,
@@ -108,7 +115,7 @@ class DataPribadi extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      email,
+                      user.email!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -178,7 +185,7 @@ class DataPribadi extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      name,
+                      user.nama!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -200,7 +207,7 @@ class DataPribadi extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      phoneNumber,
+                      user.noHandphone!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -222,7 +229,7 @@ class DataPribadi extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      nik,
+                      user.nik!,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

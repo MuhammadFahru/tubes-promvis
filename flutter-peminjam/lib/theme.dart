@@ -13,6 +13,7 @@ Color backgroundColor3 = Color(0xff242231);
 Color backgroundColor4 = Color(0xff252836);
 Color backgroundColor5 = Color(0xff2B2844);
 Color backgroundColor6 = Color(0xF1F1F1);
+Color backgroundColor7 = Color.fromARGB(255, 224, 224, 230);
 Color primaryTextColor = Color(0xff000000);
 Color secondaryTextColor = Color(0xffBDBDBD);
 Color whiteTextColor = Color(0xffffffff);
@@ -21,7 +22,7 @@ Color transparentColor = Colors.transparent;
 Color blackColor = Color(0xff2E2E2E);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
-  color: whiteTextColor,
+  color: primaryTextColor,
 );
 
 TextStyle secondaryTextStyle = GoogleFonts.poppins(

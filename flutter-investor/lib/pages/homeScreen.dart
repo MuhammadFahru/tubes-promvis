@@ -9,6 +9,11 @@ import 'package:flutter_app/cubit/funding_cubit.dart';
 import 'package:flutter_app/cubit/portofolio_cubit.dart';
 import 'package:flutter_app/cubit/wallet_cubit.dart';
 import 'package:flutter_app/pages/detail_funding_investor.dart';
+import 'package:flutter_app/services/pinjaman_service.dart';
+
+import 'package:provider/provider.dart';
+import 'package:flutter_app/providers/auth_provider.dart';
+import 'package:flutter_app/models/user_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,7 +26,8 @@ class HomeScreen extends StatelessWidget {
           create: (context) => WalletCubit(),
         ),
         BlocProvider<PortofolioCubit>(create: (context) => PortofolioCubit()),
-        BlocProvider<FundingCubit>(create: (context) => FundingCubit()),
+        BlocProvider<FundingCubit>(
+            create: (context) => FundingCubit(PinjamanService())),
       ],
       child: Scaffold(
         backgroundColor: backgroundColor6,
@@ -338,48 +344,54 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildCardListViewFunding(BuildContext context) {
-    return BlocBuilder<FundingCubit, List<FundingItem>>(
-        builder: (context, state) {
-      return SizedBox(
-          height: 170,
-          child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                final item = state[index];
-                final now = DateTime.now();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final fundingCubit = context.read<FundingCubit>();
+      fundingCubit.fetchFunding(3);
+    });
+    return BlocConsumer<FundingCubit, FundingState>(listener: (context, state) {
+      if (state is ErrorFunding) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.message)));
+      }
+    }, builder: (context, state) {
+      if (state is LoadingFunding) {
+        return Center(child: CircularProgressIndicator());
+      } else if (state is LoadedFunding) {
+        return Expanded(
+            child: ListView.builder(
+                primary: true,
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: state.pinjaman.length,
+                itemBuilder: (context, index) {
+                  final item = state.pinjaman[index];
+                  final now = DateTime.now();
 
-                String getTimeDif() {
-                  final dif = item.deadline.difference(now);
-                  if (dif.inDays >= 1) {
-                    return "${dif.inDays} Hari";
-                  } else if (dif.inHours >= 1) {
-                    return "${dif.inHours} Jam";
-                  } else if (dif.inMinutes >= 1) {
-                    return "${dif.inMinutes} Menit";
-                  } else {
-                    return "<1 Menit";
+                  String getTimeDif() {
+                    final dif = item.deadline!.difference(now);
+                    if (dif.inDays >= 1) {
+                      return "${dif.inDays} Hari";
+                    } else if (dif.inHours >= 1) {
+                      return "${dif.inHours} Jam";
+                    } else if (dif.inMinutes >= 1) {
+                      return "${dif.inMinutes} Menit";
+                    } else {
+                      return "<1 Menit";
+                    }
                   }
-                }
 
-                context
-                    .read<FundingCubit>()
-                    .sortFundingItems(SortOption.deadlineAsc);
-
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailFundingPage(),
-                        ),
-                      );
-                    },
-                    child: SizedBox(
-                      width: 300,
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailFundingPage(),
+                          ),
+                        );
+                      },
                       child: Card(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -406,7 +418,7 @@ class HomeScreen extends StatelessWidget {
                                       children: [
                                         // Name of the funding
                                         Text(
-                                          item.name,
+                                          item.nama!,
                                           style: GoogleFonts.inter(
                                             fontSize: 14.0,
                                             fontWeight: semiBold,
@@ -415,7 +427,7 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                         // desc of the funding
                                         Text(
-                                          item.desc,
+                                          item.deskripsi!,
                                           style: GoogleFonts.inter(
                                             fontSize: 12.0,
                                             color: secondaryTextColor,
@@ -435,7 +447,7 @@ class HomeScreen extends StatelessWidget {
                                               width: 5,
                                             ),
                                             Text(
-                                              item.address,
+                                              item.alamat!,
                                               style: GoogleFonts.inter(
                                                 fontSize: 10.0,
                                                 color: secondaryTextColor,
@@ -467,7 +479,7 @@ class HomeScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   _buildDataColumn(
-                                      "TOTAL PLAFOND", "Rp${item.plafond},00"),
+                                      "TOTAL PLAFOND", "Rp${item.plafond}"),
                                   _buildDataColumn(
                                       "BAGI HASIL", "${item.bagiHasil}%"),
                                   _buildDataColumn(
@@ -485,11 +497,12 @@ class HomeScreen extends StatelessWidget {
                                     children: [
                                       LinearPercentIndicator(
                                         lineHeight: 20.0,
-                                        percent: (item.terkumpul / item.plafond)
-                                            .toDouble(),
+                                        percent:
+                                            (item.terkumpul! / item.plafond!)
+                                                .toDouble(),
                                         center: Text(
                                           item.plafond != item.terkumpul
-                                              ? "${((item.terkumpul / item.plafond) * 100).toStringAsFixed(4 - ((item.terkumpul / item.plafond) * 100).toInt().toString().length)}%"
+                                              ? "${((item.terkumpul! / item.plafond!) * 100).toStringAsFixed(4 - ((item.terkumpul! / item.plafond!) * 100).toInt().toString().length)}%"
                                               : "Selesai",
                                           style: GoogleFonts.inter(
                                               color: Colors.white,
@@ -507,7 +520,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       Center(
                                         child: Text(
-                                          "Rp${item.terkumpul},00 / Rp${item.plafond},00",
+                                          "Rp${item.terkumpul!.toInt()} / Rp${item.plafond}",
                                           style: GoogleFonts.inter(
                                               color: primaryTextColor,
                                               fontWeight: semiBold,
@@ -521,7 +534,7 @@ class HomeScreen extends StatelessWidget {
                                     getTimeDif(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: item.deadline
+                                      color: item.deadline!
                                                   .difference(now)
                                                   .inHours >=
                                               1
@@ -534,9 +547,11 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
-                    ));
-              }));
+                      ));
+                }));
+      } else {
+        return Center(child: Text('No data'));
+      }
     });
   }
 }
@@ -544,6 +559,9 @@ class HomeScreen extends StatelessWidget {
 class WalletModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     return BlocBuilder<WalletCubit, int>(
       builder: (context, walletValue) {
         return Container(
@@ -571,7 +589,7 @@ class WalletModule extends StatelessWidget {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'Rp$walletValue,00',
+                        'Rp${user.walletBalance},00',
                         style: GoogleFonts.inter(
                             fontSize: 24.0,
                             color: Colors.white,

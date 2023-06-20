@@ -21,14 +21,27 @@ class PinjamanModel {
     required this.status,
   });
 
+  factory PinjamanModel.fromJsonFactory(Map<String, dynamic> json) {
+    return PinjamanModel(
+        nama: json['nama'],
+        deskripsi: json['deskripsi'],
+        alamat: json['alamat'],
+        plafond: json['plafond'],
+        terkumpul: json['terkumpul'],
+        bagiHasil: json['bagi_hasil'],
+        tenor: json['tenor'],
+        deadline: DateTime.parse(json['deadline']),
+        status: json['status']);
+  }
+
   PinjamanModel.fromJson(Map<String, dynamic> json) {
     nama = json['nama'];
     deskripsi = json['deskripsi'];
     alamat = json['alamat'];
-    plafond = json['plafond'];
-    terkumpul = json['terkumpul'];
-    bagiHasil = json['bagi_hasil'];
-    tenor = json['tenor'];
+    plafond = double.parse(json['plafond']);
+    terkumpul = double.parse(json['terkumpul']);
+    bagiHasil = double.parse(json['bagi_hasil']);
+    tenor = int.parse(json['tenor']);
     deadline = DateTime.parse(json['deadline']);
     status = json['status'];
   }

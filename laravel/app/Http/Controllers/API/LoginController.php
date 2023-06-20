@@ -6,6 +6,7 @@ use Exception;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -38,10 +39,13 @@ class LoginController extends Controller
             }
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
+
+            $wallet = Wallet::where('users_id', $user->id)->first();
             return ResponseFormatter::success([
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
-                'user' => $user
+                'user' => $user,
+                'wallet' => $wallet
             ],'Authenticated');
         } catch (Exception $error) {
             return ResponseFormatter::error([
